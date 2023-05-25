@@ -1,0 +1,23 @@
+{
+  "name": "superagentai-js",
+  "version": "0.0.1",
+  "description": "Superagent.sh Javascript SDK",
+  "main": "src/superagent.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/homanp/superagent-js.git"
+  },
+  "keywords": [
+    "superagent",
+    "llm-agent"
+  ],
+  "author": "Ismail Pelaseyed",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/homanp/superagent-js/issues"
+  },
+  "homepage": "https://github.com/homanp/superagent-js#readme"
+}
