@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Superagent.sh Javascript SDK",
   "main": "src/superagent.js",
+  "type": "module",
   "scripts": {
     "test": "npm run test"
   },
