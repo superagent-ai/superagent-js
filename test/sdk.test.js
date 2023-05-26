@@ -45,3 +45,41 @@ describe("Prompts", () => {
     expect(data).to.equal(null);
   });
 });
+
+describe("Documents", () => {
+  let document;
+
+  it("should create a document", async () => {
+    const { success, data } = await superagent.documents().create({
+      name: "Test",
+      url: "https://digitalassets.tesla.com/tesla-contents/image/upload/IR/TSLA-Q1-2023-Update",
+      type: "PDF",
+    });
+
+    document = data;
+
+    expect(success).to.equal(true);
+    expect(data).to.be.an("object");
+  });
+
+  it("should retrieve a list of documents", async () => {
+    const { success, data } = await superagent.documents().list();
+
+    expect(success).to.equal(true);
+    expect(data).to.be.an("array");
+  });
+
+  it("should retrieve a single document", async () => {
+    const { success, data } = await superagent.documents().get(document.id);
+
+    expect(success).to.equal(true);
+    expect(data).to.be.an("object");
+  });
+
+  it("should delete a single document", async () => {
+    const { success, data } = await superagent.documents().delete(document.id);
+
+    expect(success).to.equal(true);
+    expect(data).to.equal(null);
+  });
+});

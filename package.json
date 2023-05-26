@@ -5,7 +5,7 @@
   "main": "src/superagent.js",
   "type": "module",
   "scripts": {
-    "test": "npx mocha test/sdk.test.js"
+    "test": "npx mocha --timeout 100000 test/sdk.test.js"
   },
   "repository": {
     "type": "git",
