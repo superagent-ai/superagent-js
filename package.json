@@ -5,7 +5,7 @@
   "main": "src/superagent.js",
   "type": "module",
   "scripts": {
-    "test": "npm run test"
+    "test": "npx mocha test/sdk.test.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/homanp/superagent-js/issues"
   },
-  "homepage": "https://github.com/homanp/superagent-js#readme"
+  "homepage": "https://github.com/homanp/superagent-js#readme",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.2.0"
+  }
 }

@@ -5,11 +5,4 @@ const BEARER_TOKEN =
 
 const superagent = new SuperagentSDK(BEARER_TOKEN);
 
-const prompts = await superagent.prompts().list();
-const prompt = await superagent.prompts().create({
-  name: "Test",
-  input_variables: ["human_input", "chat_history"],
-  template: "My prompt with variables {human_input} and {chat_history}",
-});
-
-console.log(prompt);
+const response = await superagent.prompts().delete("cli4m7agx0005uj1llc6wxavg");
