@@ -128,7 +128,6 @@ describe("Agents", () => {
   });
 
   it("should delete a single agent", async () => {
-    console.log(agent.id);
     const { success, data } = await superagent.agents().delete(agent.id);
 
     expect(success).to.equal(true);
