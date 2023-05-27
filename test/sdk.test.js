@@ -83,3 +83,55 @@ describe("Documents", () => {
     expect(data).to.equal(null);
   });
 });
+
+describe("Agents", () => {
+  let agent;
+
+  it("should create an agent", async () => {
+    const { success, data } = await superagent.agents().create({
+      name: "Test agent",
+      type: "REACT",
+      has_memory: true,
+      llm: { provider: "openai-chat", model: "gpt-3.5-turbo" },
+    });
+
+    agent = data;
+
+    expect(success).to.equal(true);
+    expect(data).to.be.an("object");
+  });
+
+  it("should retrieve a list of agents", async () => {
+    const { success, data } = await superagent.agents().list();
+
+    expect(success).to.equal(true);
+    expect(data).to.be.an("array");
+  });
+
+  it("should retrieve a single agent", async () => {
+    const { success, data } = await superagent.agents().get(agent.id);
+
+    expect(success).to.equal(true);
+    expect(data).to.be.an("object");
+  });
+
+  it("should run a single agent", async () => {
+    const { success, data } = await superagent.agents().predict({
+      id: agent.id,
+      input: { human_input: "hi" },
+      has_streaming: false,
+      apiToken: "4cab610ce2214347b121a32f421c2856",
+    });
+
+    expect(success).to.equal(true);
+    expect(data).to.be.a("string");
+  });
+
+  it("should delete a single agent", async () => {
+    console.log(agent.id);
+    const { success, data } = await superagent.agents().delete(agent.id);
+
+    expect(success).to.equal(true);
+    expect(data).to.equal(null);
+  });
+});
