@@ -20,13 +20,12 @@ export default class SuperagentSDK {
           const queryString = new URLSearchParams(data).toString();
           url += `?${queryString}`;
         } else {
-          const { apiToken, ...payload } = data;
-          options.body = JSON.stringify(payload);
+          options.body = JSON.stringify(data);
 
-          if (apiToken) {
+          if (data.input) {
             options.headers = {
               "Content-Type": "application/json",
-              X_SUPERAGENT_API_KEY: apiToken,
+              X_SUPERAGENT_API_KEY: self.authToken,
             };
           }
         }
@@ -78,18 +77,17 @@ export default class SuperagentSDK {
       delete: async (id) => await this._request("DELETE", `/agents/${id}`),
       list: async () => await this._request("GET", "/agents"),
       get: async (id) => await this._request("GET", `/agents/${id}`),
-      create: async ({ name, llm, type, has_memory }) =>
+      create: async ({ name, llm, type = "REACT", has_memory }) =>
         await this._request("POST", "/agents", {
           name,
           type,
           llm,
           has_memory,
         }),
-      predict: async ({ id, input, has_streaming, apiToken }) =>
+      predict: async ({ id, input, has_streaming }) =>
         await this._request("POST", `/agents/${id}/predict`, {
           input,
           has_streaming,
-          apiToken,
         }),
     };
   }

@@ -2,10 +2,9 @@ import chai from "chai";
 import chaiHttp from "chai-http";
 import SuperagentSDK from "../src/superagent.js";
 
-const BEARER_TOKEN =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTUzNzA5ODQsInVzZXJJZCI6ImNsaGoyOHUxMzAwMDA2aWcwMnB0cG0xc2gifQ.yS6HjD6SISDi6DwzcTV289pKiH4UkNT_mZnqJpR_sSI";
+const API_TOKEN = "4cab610ce2214347b121a32f421c2856";
 const expect = chai.expect;
-const superagent = new SuperagentSDK(BEARER_TOKEN);
+const superagent = new SuperagentSDK(API_TOKEN);
 
 chai.use(chaiHttp);
 
@@ -120,7 +119,6 @@ describe("Agents", () => {
       id: agent.id,
       input: { human_input: "hi" },
       has_streaming: false,
-      apiToken: "4cab610ce2214347b121a32f421c2856",
     });
 
     expect(success).to.equal(true);
