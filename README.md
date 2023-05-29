@@ -14,10 +14,11 @@ npm i superagentai-js
 
 #### 2. Usage
 
-````javascript
+```javascript
 import SuperagentSDK from "superagentai-js";
 
 const superagent = new SuperagentSDK(process.env.SUPERAGENT_API_TOKEN);
+```
 
 ## Examples
 
@@ -55,7 +56,7 @@ await superagent.agents().predict({
   input: { human_input: "Hello" },
   has_streaming: true,
 });
-````
+```
 
 ### Documents
 
