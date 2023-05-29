@@ -25,7 +25,7 @@ export default class SuperagentSDK {
           if (data.input) {
             options.headers = {
               "Content-Type": "application/json",
-              X_SUPERAGENT_API_KEY: self.authToken,
+              X_SUPERAGENT_API_KEY: this.authToken,
             };
           }
         }

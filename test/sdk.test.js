@@ -2,7 +2,7 @@ import chai from "chai";
 import chaiHttp from "chai-http";
 import SuperagentSDK from "../src/superagent.js";
 
-const API_TOKEN = "4cab610ce2214347b121a32f421c2856";
+const API_TOKEN = "1c9d14f44fc7492990148e003541577d";
 const expect = chai.expect;
 const superagent = new SuperagentSDK(API_TOKEN);
 
