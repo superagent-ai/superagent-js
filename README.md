@@ -1,3 +1,28 @@
+# Superagent Javascript SDK
+
+This is the offical Javascript SDK for [superagent.sh](https://superagents.sh).
+
+## Getting started
+
+#### 1. Installation
+
+Install the `superagentai-js` package.
+
+```bash
+npm i superagentai-js
+```
+
+#### 2. Usage
+
+````javascript
+import SuperagentSDK from "superagentai-js";
+
+const superagent = new SuperagentSDK(process.env.SUPERAGENT_API_TOKEN);
+
+## Examples
+
+- [Superagent in NextJS](https://github.com/homanp/nextjs-superagent)
+
 ## API Reference
 
 The SDK exposes the following three resources: `Prompts`, `Documents` and `Agents`. Below you will find a schematic overivew of each resource:
@@ -30,7 +55,7 @@ await superagent.agents().predict({
   input: { human_input: "Hello" },
   has_streaming: true,
 });
-```
+````
 
 ### Documents
 
