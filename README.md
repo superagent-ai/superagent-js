@@ -1,6 +1,20 @@
-# Superagent Javascript SDK
+<div align="center">
 
-This is the offical Javascript SDK for [superagent.sh](https://superagent.sh).
+# Superagent Javascript SDK 🥷
+
+**This is the offical Javascript SDK for [superagent.sh](https://superagents.sh)**.
+
+<p>
+<img alt="GitHub Contributors" src="https://img.shields.io/github/contributors/homanp/superagent-js" />
+<img alt="GitHub Last Commit" src="https://img.shields.io/github/last-commit/homanp/superagent-js" />
+<img alt="" src="https://img.shields.io/github/repo-size/homanp/superagent-js" />
+<img alt="GitHub Issues" src="https://img.shields.io/github/issues/homanp/superagent-js" />
+<img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/homanp/superagent-js" />
+<img alt="Github License" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+<img alt="Discord" src="https://img.shields.io/discord/1110910277110743103?label=Discord&logo=discord&logoColor=white&style=plastic&color=d7b023)](https://discord.gg/e8j7mgjDUK" />
+</p>
+
+</div>
 
 ## Getting started
 

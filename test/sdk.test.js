@@ -53,6 +53,7 @@ describe("Documents", () => {
       name: "Test",
       url: "https://digitalassets.tesla.com/tesla-contents/image/upload/IR/TSLA-Q1-2023-Update",
       type: "PDF",
+      authorization: null,
     });
 
     document = data;
