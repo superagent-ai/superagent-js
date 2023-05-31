@@ -1,6 +1,6 @@
 export default class SuperagentSDK {
   constructor(authToken) {
-    this.baseUrl = "https://api.superagent.sh/api/v1";
+    this.baseUrl = "http://127.0.0.1:8000/api/v1";
     this.authToken = authToken;
   }
 
