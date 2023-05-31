@@ -63,11 +63,12 @@ export default class SuperagentSDK {
       delete: async (id) => await this._request("DELETE", `/documents/${id}`),
       list: async () => await this._request("GET", "/documents"),
       get: async (id) => await this._request("GET", `/documents/${id}`),
-      create: async ({ name, url, type }) =>
+      create: async ({ name, url, type, authorization = null }) =>
         await this._request("POST", "/documents", {
           name,
           url,
           type,
+          authorization,
         }),
     };
   }
