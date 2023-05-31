@@ -1,6 +1,6 @@
 # Superagent Javascript SDK
 
-This is the offical Javascript SDK for [superagent.sh](https://superagents.sh).
+This is the offical Javascript SDK for [superagent.sh](https://superagent.sh).
 
 ## Getting started
 
