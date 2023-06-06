@@ -14,6 +14,11 @@ declare module 'superagentSDK' {
     authorization?: string | null;
   }
 
+  interface Tool {
+    name: string;
+    type: string;
+  }
+
   interface Agent {
     name: string;
     llm: string;
@@ -49,5 +54,11 @@ declare module 'superagentSDK' {
       create(agent: Agent): Promise<any>;
       predict(prediction: Prediction): Promise<any>;
     };
+    tools(): {
+      delete(id: string): Promise<any>;
+      list(): Promise<any>;
+      get(id: string): Promise<any>;
+      create(tool: Tool): Promise<any>;
+    }
   }
 }

@@ -45,6 +45,43 @@ describe("Prompts", () => {
   });
 });
 
+describe("Tools", () => {
+  let tool;
+
+  it("should create a tool", async () => {
+    const { success, data } = await superagent.tools().create({
+      name: "My test tool",
+      type: "SEARCH",
+    });
+
+    tool = data;
+
+    expect(success).to.equal(true);
+    expect(data).to.be.an("object");
+  });
+
+  it("should retrieve a list of tools", async () => {
+    const { success, data } = await superagent.tools().list();
+
+    expect(success).to.equal(true);
+    expect(data).to.be.an("array");
+  });
+
+  it("should retrieve a single tool", async () => {
+    const { success, data } = await superagent.tools().get(tool.id);
+
+    expect(success).to.equal(true);
+    expect(data).to.be.an("object");
+  });
+
+  it("should delete a single tool", async () => {
+    const { success, data } = await superagent.tools().delete(tool.id);
+
+    expect(success).to.equal(true);
+    expect(data).to.equal(null);
+  });
+});
+
 describe("Documents", () => {
   let document;
 

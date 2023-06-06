@@ -59,16 +59,38 @@ await superagent.agents().create({
   name: "Ny agent",
   llm: {
     provider: "openai-chat",
-    model: "gpt-3.5-turbo",
+    model: "gpt-4",
     api_key: process.env.OPENAI_API_KEY,
   },
   has_memory: true,
+  promptId: "<PROMPT_ID>",
+  documentId: "<DOCUMENT_ID>",
+  toolId: "<TOOL_ID>",
 });
 
 // Run an agent
 await superagent.agents().predict({
   input: { human_input: "Hello" },
   has_streaming: true,
+});
+```
+
+### Tools
+
+```javascript
+// List all tools
+await superagent.tools().list();
+
+// Retuns a specific tool
+await superagent.tools().get("<TOOL_ID>");
+
+// Delete tool
+await superagent.tools().delete("<TOOL_ID>");
+
+// Create tool
+await superagent.tools().create({
+  name: "My tool",
+  type: "SEARCH",
 });
 ```
 

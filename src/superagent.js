@@ -92,4 +92,17 @@ export default class SuperagentSDK {
         }),
     };
   }
+
+  tools() {
+    return {
+      delete: async (id) => await this._request("DELETE", `/tools/${id}`),
+      list: async () => await this._request("GET", "/tools"),
+      get: async (id) => await this._request("GET", `/tools/${id}`),
+      create: async ({ name, type = "SEARCH" }) =>
+        await this._request("POST", "/tools", {
+          name,
+          type,
+        }),
+    };
+  }
 }
