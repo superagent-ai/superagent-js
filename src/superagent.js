@@ -78,12 +78,23 @@ export default class SuperagentSDK {
       delete: async (id) => await this._request("DELETE", `/agents/${id}`),
       list: async () => await this._request("GET", "/agents"),
       get: async (id) => await this._request("GET", `/agents/${id}`),
-      create: async ({ name, llm, type = "REACT", has_memory }) =>
+      create: async ({
+        name,
+        llm,
+        type = "REACT",
+        has_memory,
+        document_id = null,
+        prompt_id = null,
+        tool_id = null,
+      }) =>
         await this._request("POST", "/agents", {
           name,
           type,
           llm,
           has_memory,
+          documentId: document_id,
+          promptId: prompt_id,
+          toolId: tool_id,
         }),
       predict: async ({ id, input, has_streaming }) =>
         await this._request("POST", `/agents/${id}/predict`, {
