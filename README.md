@@ -123,6 +123,9 @@ await superagent.documents().create({
   // Retuns a specific prompt
   await superagent.prompts().get("<PROMPT_ID>");
 
+  // Update a specific prompt
+  await superagent.prompts().update("<PROMPT_ID>", {name: "Some updated name"});
+
   // Delete prompt
   await superagent.prompts().delete("<PROMPT_ID>");
 

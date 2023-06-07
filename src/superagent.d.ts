@@ -41,6 +41,7 @@ declare module 'superagentSDK' {
     prompts(): {
       delete(id: string): Promise<any>;
       get(id: string): Promise<any>;
+      update(id: string, data: object): Promise<any>;
       list(): Promise<any>;
       create(prompt: Prompt): Promise<any>;
     };

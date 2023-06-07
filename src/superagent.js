@@ -49,6 +49,8 @@ export default class SuperagentSDK {
       delete: async (id) => await this._request("DELETE", `/prompts/${id}`),
       get: async (id) => await this._request("GET", `/prompts/${id}`),
       list: async () => await this._request("GET", "/prompts"),
+      update: async (id, payload) =>
+        await this._request("PATCH", `/prompts/${id}`, { ...payload }),
       create: async ({ name = null, input_variables = [], template = null }) =>
         await this._request("POST", "/prompts", {
           name,

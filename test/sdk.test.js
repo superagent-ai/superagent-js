@@ -37,6 +37,15 @@ describe("Prompts", () => {
     expect(data).to.be.an("object");
   });
 
+  it("should update a single prompt", async () => {
+    const { success, data } = await superagent
+      .prompts()
+      .update(prompt.id, { name: "Patch prompt" });
+
+    expect(success).to.equal(true);
+    expect(data).to.be.an("object");
+  });
+
   it("should delete a single prompt", async () => {
     const { success, data } = await superagent.prompts().delete(prompt.id);
 
