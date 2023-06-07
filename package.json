@@ -1,6 +1,6 @@
 {
   "name": "superagentai-js",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "types": "src/superagent.d.ts",
   "description": "Superagent.sh Javascript SDK",
   "main": "src/superagent.js",
