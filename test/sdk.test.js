@@ -38,9 +38,11 @@ describe("Prompts", () => {
   });
 
   it("should update a single prompt", async () => {
-    const { success, data } = await superagent
-      .prompts()
-      .update(prompt.id, { name: "Patch prompt" });
+    const { success, data } = await superagent.prompts().update(prompt.id, {
+      name: "Patch prompt",
+      input_variables: ["history"],
+      template: "Patch prompt {history}",
+    });
 
     expect(success).to.equal(true);
     expect(data).to.be.an("object");
