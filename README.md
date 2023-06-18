@@ -111,6 +111,8 @@ await superagent.documents().create({
   name: "Ny agent",
   url: "https://digitalassets.tesla.com/tesla-contents/image/upload/IR/TSLA-Q1-2023-Update",
   type: "PDF",
+  authorization: null,
+  splitter: { type: "character", chunk_size: 1000, chunk_overlap: 0 },
 });
 ```
 
