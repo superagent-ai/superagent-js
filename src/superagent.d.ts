@@ -23,10 +23,8 @@ declare module 'superagentSDK' {
     name: string;
     llm: string;
     type?: string;
-    has_memory: boolean;
-    documentId: string;
+    hasMemory: boolean;
     promptId: string;
-    toolId: string;
   }
 
   interface Prediction {

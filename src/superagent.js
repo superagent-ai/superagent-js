@@ -1,6 +1,6 @@
 export default class SuperagentSDK {
   constructor(authToken) {
-    this.baseUrl = "https://api.superagent.sh/api/v1";
+    this.baseUrl = "http://127.0.0.1:8000/api/v1";
     this.authToken = authToken;
   }
 
@@ -84,19 +84,15 @@ export default class SuperagentSDK {
         name,
         llm,
         type = "REACT",
-        has_memory,
-        document_id = null,
-        prompt_id = null,
-        tool_id = null,
+        hasMemory,
+        promptId = null,
       }) =>
         await this._request("POST", "/agents", {
           name,
           type,
           llm,
-          has_memory,
-          documentId: document_id,
-          promptId: prompt_id,
-          toolId: tool_id,
+          hasMemory,
+          promptId,
         }),
       predict: async ({ id, input, has_streaming }) =>
         await this._request("POST", `/agents/${id}/predict`, {

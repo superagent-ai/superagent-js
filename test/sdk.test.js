@@ -139,7 +139,7 @@ describe("Agents", () => {
     const { success, data } = await superagent.agents().create({
       name: "Test agent",
       type: "REACT",
-      has_memory: true,
+      hasMemory: true,
       llm: { provider: "openai-chat", model: "gpt-3.5-turbo" },
     });
 
@@ -166,7 +166,7 @@ describe("Agents", () => {
   it("should run a single agent", async () => {
     const { success, data } = await superagent.agents().predict({
       id: agent.id,
-      input: { human_input: "hi" },
+      input: { input: "hi" },
       has_streaming: false,
     });
 
