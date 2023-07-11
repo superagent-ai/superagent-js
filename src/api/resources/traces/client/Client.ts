@@ -27,7 +27,7 @@ export class Traces {
                 X_SUPERAGENT_API_KEY: await core.Supplier.get(this._options.apiKey),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.31",
+                "X-Fern-SDK-Version": "v0.0.32",
             },
             contentType: "application/json",
             timeoutMs: 60000,
