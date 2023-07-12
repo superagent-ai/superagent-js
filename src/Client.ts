@@ -17,7 +17,7 @@ import { Traces } from "./api/resources/traces/client/Client";
 export declare namespace SuperAgentClient {
     interface Options {
         environment: core.Supplier<string>;
-        apiKey?: core.Supplier<string | undefined>;
+        token?: core.Supplier<core.BearerToken | undefined>;
     }
 }
 

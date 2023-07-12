@@ -11,7 +11,7 @@ import * as serializers from "../../../../serialization";
 export declare namespace Prompts {
     interface Options {
         environment: core.Supplier<string>;
-        apiKey?: core.Supplier<string | undefined>;
+        token?: core.Supplier<core.BearerToken | undefined>;
     }
 }
 
@@ -26,10 +26,10 @@ export class Prompts {
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/prompts"),
             method: "GET",
             headers: {
-                X_SUPERAGENT_API_KEY: await core.Supplier.get(this._options.apiKey),
+                Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.32",
+                "X-Fern-SDK-Version": "v0.0.33",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -69,10 +69,10 @@ export class Prompts {
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/prompts"),
             method: "POST",
             headers: {
-                X_SUPERAGENT_API_KEY: await core.Supplier.get(this._options.apiKey),
+                Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.32",
+                "X-Fern-SDK-Version": "v0.0.33",
             },
             contentType: "application/json",
             body: await serializers.Prompt.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -125,10 +125,10 @@ export class Prompts {
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/prompts/${promptId}`),
             method: "GET",
             headers: {
-                X_SUPERAGENT_API_KEY: await core.Supplier.get(this._options.apiKey),
+                Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.32",
+                "X-Fern-SDK-Version": "v0.0.33",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -180,10 +180,10 @@ export class Prompts {
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/prompts/${promptId}`),
             method: "PATCH",
             headers: {
-                X_SUPERAGENT_API_KEY: await core.Supplier.get(this._options.apiKey),
+                Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.32",
+                "X-Fern-SDK-Version": "v0.0.33",
             },
             contentType: "application/json",
             body: await serializers.prompts.patchPrompt.Request.jsonOrThrow(request, {
@@ -238,10 +238,10 @@ export class Prompts {
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/prompts/${promptId}`),
             method: "DELETE",
             headers: {
-                X_SUPERAGENT_API_KEY: await core.Supplier.get(this._options.apiKey),
+                Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.32",
+                "X-Fern-SDK-Version": "v0.0.33",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -282,5 +282,14 @@ export class Prompts {
                     message: _response.error.errorMessage,
                 });
         }
+    }
+
+    protected async _getAuthorizationHeader() {
+        const bearer = await core.Supplier.get(this._options.token);
+        if (bearer != null) {
+            return `Bearer ${bearer}`;
+        }
+
+        return undefined;
     }
 }

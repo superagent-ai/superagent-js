@@ -11,7 +11,7 @@ import * as errors from "../../../../errors";
 export declare namespace Auth {
     interface Options {
         environment: core.Supplier<string>;
-        apiKey?: core.Supplier<string | undefined>;
+        token?: core.Supplier<core.BearerToken | undefined>;
     }
 }
 
@@ -26,10 +26,10 @@ export class Auth {
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/auth/sign-in"),
             method: "POST",
             headers: {
-                X_SUPERAGENT_API_KEY: await core.Supplier.get(this._options.apiKey),
+                Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.32",
+                "X-Fern-SDK-Version": "v0.0.33",
             },
             contentType: "application/json",
             body: await serializers.SignIn.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -81,10 +81,10 @@ export class Auth {
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/auth/sign-up"),
             method: "POST",
             headers: {
-                X_SUPERAGENT_API_KEY: await core.Supplier.get(this._options.apiKey),
+                Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.32",
+                "X-Fern-SDK-Version": "v0.0.33",
             },
             contentType: "application/json",
             body: await serializers.SignUp.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -126,5 +126,14 @@ export class Auth {
                     message: _response.error.errorMessage,
                 });
         }
+    }
+
+    protected async _getAuthorizationHeader() {
+        const bearer = await core.Supplier.get(this._options.token);
+        if (bearer != null) {
+            return `Bearer ${bearer}`;
+        }
+
+        return undefined;
     }
 }
