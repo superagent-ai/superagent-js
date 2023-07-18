@@ -1,5 +1,6 @@
 export * as agent from "./agent";
 export * as agentDocuments from "./agentDocuments";
+export * as tags from "./tags";
 export * as agentTools from "./agentTools";
 export * as auth from "./auth";
 export * as user from "./user";
@@ -10,6 +11,7 @@ export * as tools from "./tools";
 export * as traces from "./traces";
 export * from "./agent/client/requests";
 export * from "./agentDocuments/client/requests";
+export * from "./tags/client/requests";
 export * from "./agentTools/client/requests";
 export * from "./auth/client/requests";
 export * from "./apiToken/client/requests";

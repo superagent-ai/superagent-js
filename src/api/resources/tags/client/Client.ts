@@ -8,22 +8,22 @@ import * as errors from "../../../../errors";
 import * as SuperAgent from "../../..";
 import * as serializers from "../../../../serialization";
 
-export declare namespace Documents {
+export declare namespace Tags {
     interface Options {
         environment: core.Supplier<string>;
         token?: core.Supplier<core.BearerToken | undefined>;
     }
 }
 
-export class Documents {
-    constructor(protected readonly _options: Documents.Options) {}
+export class Tags {
+    constructor(protected readonly _options: Tags.Options) {}
 
     /**
-     * List all documents
+     * List all tags
      */
-    public async listDocuments(): Promise<unknown> {
+    public async listTags(): Promise<unknown> {
         const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/documents"),
+            url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/tags"),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
@@ -61,12 +61,12 @@ export class Documents {
     }
 
     /**
-     * Create a new document
+     * Create a new tag
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async createDocument(request: SuperAgent.Document): Promise<unknown> {
+    public async createATag(request: SuperAgent.Tag): Promise<unknown> {
         const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/documents"),
+            url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/tags"),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
@@ -75,7 +75,7 @@ export class Documents {
                 "X-Fern-SDK-Version": "v0.0.35",
             },
             contentType: "application/json",
-            body: await serializers.Document.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.Tag.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
@@ -117,12 +117,12 @@ export class Documents {
     }
 
     /**
-     * Get a specific document
+     * Get a specific tag
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async getDocument(documentId: string): Promise<unknown> {
+    public async getTag(tagId: string): Promise<unknown> {
         const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/documents/${documentId}`),
+            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/tags/${tagId}`),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
@@ -172,12 +172,68 @@ export class Documents {
     }
 
     /**
-     * Delete a specific document
+     * Patch a specific tag
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async deleteDocument(documentId: string): Promise<unknown> {
+    public async patchTag(tagId: string, request: Record<string, unknown>): Promise<unknown> {
         const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/documents/${documentId}`),
+            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/tags/${tagId}`),
+            method: "PATCH",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "superagentai-js",
+                "X-Fern-SDK-Version": "v0.0.35",
+            },
+            contentType: "application/json",
+            body: await serializers.tags.patchTag.Request.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: 60000,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new SuperAgent.UnprocessableEntityError(
+                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.SuperAgentError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.SuperAgentError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.SuperAgentTimeoutError();
+            case "unknown":
+                throw new errors.SuperAgentError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Delete a specific tag
+     * @throws {@link SuperAgent.UnprocessableEntityError}
+     */
+    public async deleteTag(tagId: string): Promise<unknown> {
+        const _response = await core.fetcher({
+            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/tags/${tagId}`),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),

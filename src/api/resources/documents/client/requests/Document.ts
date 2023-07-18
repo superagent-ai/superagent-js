@@ -4,9 +4,10 @@
 
 export interface Document {
     type: string;
-    url: string;
+    url?: string;
     name: string;
     authorization?: Record<string, unknown>;
+    metadata?: Record<string, unknown>;
     fromPage?: number;
     toPage?: number;
     splitter?: Record<string, unknown>;

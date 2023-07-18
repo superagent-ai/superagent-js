@@ -5,6 +5,7 @@
 import * as core from "./core";
 import { Agent } from "./api/resources/agent/client/Client";
 import { AgentDocuments } from "./api/resources/agentDocuments/client/Client";
+import { Tags } from "./api/resources/tags/client/Client";
 import { AgentTools } from "./api/resources/agentTools/client/Client";
 import { Auth } from "./api/resources/auth/client/Client";
 import { User } from "./api/resources/user/client/Client";
@@ -34,6 +35,12 @@ export class SuperAgentClient {
 
     public get agentDocuments(): AgentDocuments {
         return (this._agentDocuments ??= new AgentDocuments(this._options));
+    }
+
+    protected _tags: Tags | undefined;
+
+    public get tags(): Tags {
+        return (this._tags ??= new Tags(this._options));
     }
 
     protected _agentTools: AgentTools | undefined;

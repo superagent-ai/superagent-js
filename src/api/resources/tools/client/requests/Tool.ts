@@ -5,6 +5,7 @@
 export interface Tool {
     name: string;
     type: string;
+    description: string;
     authorization?: Record<string, unknown>;
     metadata?: Record<string, unknown>;
 }

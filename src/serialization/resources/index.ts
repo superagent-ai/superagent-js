@@ -1,8 +1,11 @@
 export * as agent from "./agent";
+export * as tags from "./tags";
 export * as prompts from "./prompts";
+export * as tools from "./tools";
 export * from "./agent/client/requests";
 export * as agentDocuments from "./agentDocuments";
 export * from "./agentDocuments/client/requests";
+export * from "./tags/client/requests";
 export * as agentTools from "./agentTools";
 export * from "./agentTools/client/requests";
 export * as auth from "./auth";
@@ -12,5 +15,4 @@ export * from "./apiToken/client/requests";
 export * as documents from "./documents";
 export * from "./documents/client/requests";
 export * from "./prompts/client/requests";
-export * as tools from "./tools";
 export * from "./tools/client/requests";
