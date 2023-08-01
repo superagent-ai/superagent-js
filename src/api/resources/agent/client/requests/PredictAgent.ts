@@ -5,4 +5,5 @@
 export interface PredictAgent {
     input: Record<string, unknown>;
     hasStreaming?: boolean;
+    session?: string;
 }

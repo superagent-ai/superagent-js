@@ -10,11 +10,13 @@ export const PredictAgent: core.serialization.Schema<serializers.PredictAgent.Ra
     core.serialization.object({
         input: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
         hasStreaming: core.serialization.property("has_streaming", core.serialization.boolean().optional()),
+        session: core.serialization.string().optional(),
     });
 
 export declare namespace PredictAgent {
     interface Raw {
         input: Record<string, unknown>;
         has_streaming?: boolean | null;
+        session?: string | null;
     }
 }
