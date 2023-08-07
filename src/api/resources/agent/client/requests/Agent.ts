@@ -5,6 +5,8 @@
 export interface Agent {
     name: string;
     type: string;
+    description?: string;
+    avatarUrl?: string;
     llm?: Record<string, unknown>;
     hasMemory?: boolean;
     promptId?: string;

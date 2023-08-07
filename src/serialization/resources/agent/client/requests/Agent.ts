@@ -9,6 +9,8 @@ import * as core from "../../../../../core";
 export const Agent: core.serialization.Schema<serializers.Agent.Raw, SuperAgent.Agent> = core.serialization.object({
     name: core.serialization.string(),
     type: core.serialization.string(),
+    description: core.serialization.string().optional(),
+    avatarUrl: core.serialization.string().optional(),
     llm: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     hasMemory: core.serialization.boolean().optional(),
     promptId: core.serialization.string().optional(),
@@ -18,6 +20,8 @@ export declare namespace Agent {
     interface Raw {
         name: string;
         type: string;
+        description?: string | null;
+        avatarUrl?: string | null;
         llm?: Record<string, unknown> | null;
         hasMemory?: boolean | null;
         promptId?: string | null;
