@@ -5,6 +5,7 @@
 export interface Document {
     type: string;
     url?: string;
+    description?: string;
     content?: string;
     name: string;
     authorization?: Record<string, unknown>;

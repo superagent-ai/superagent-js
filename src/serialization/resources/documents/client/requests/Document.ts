@@ -10,6 +10,7 @@ export const Document: core.serialization.Schema<serializers.Document.Raw, Super
     core.serialization.object({
         type: core.serialization.string(),
         url: core.serialization.string().optional(),
+        description: core.serialization.string().optional(),
         content: core.serialization.string().optional(),
         name: core.serialization.string(),
         authorization: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
@@ -23,6 +24,7 @@ export declare namespace Document {
     interface Raw {
         type: string;
         url?: string | null;
+        description?: string | null;
         content?: string | null;
         name: string;
         authorization?: Record<string, unknown> | null;
