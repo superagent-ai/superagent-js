@@ -3,10 +3,10 @@
  */
 
 import * as core from "../../../../core";
-import urlJoin from "url-join";
-import * as errors from "../../../../errors";
 import * as SuperAgent from "../../..";
+import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
+import * as errors from "../../../../errors";
 
 export declare namespace ApiToken {
     interface Options {
@@ -21,7 +21,7 @@ export class ApiToken {
     /**
      * List all API tokens
      */
-    public async listApiTokens(): Promise<unknown> {
+    public async listApiTokens(): Promise<SuperAgent.ApiTokenListOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/api-tokens"),
             method: "GET",
@@ -29,13 +29,18 @@ export class ApiToken {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.ApiTokenListOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -64,7 +69,7 @@ export class ApiToken {
      * Create a new API token
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async createApiToken(request: SuperAgent.ApiToken): Promise<unknown> {
+    public async createApiToken(request: SuperAgent.AppLibModelsApiTokenApiToken): Promise<SuperAgent.ApiTokenOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/api-tokens"),
             method: "POST",
@@ -72,14 +77,21 @@ export class ApiToken {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
-            body: await serializers.ApiToken.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.AppLibModelsApiTokenApiToken.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.ApiTokenOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -120,7 +132,7 @@ export class ApiToken {
      * Get a specific API token
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async getApiToken(tokenId: string): Promise<unknown> {
+    public async getApiToken(tokenId: string): Promise<SuperAgent.ApiTokenOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/api-tokens/${tokenId}`),
             method: "GET",
@@ -128,13 +140,18 @@ export class ApiToken {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.ApiTokenOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -175,7 +192,7 @@ export class ApiToken {
      * Delete a specific API token
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async deleteApiToken(tokenId: string): Promise<unknown> {
+    public async deleteApiToken(tokenId: string): Promise<SuperAgent.ApiTokenOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/api-tokens/${tokenId}`),
             method: "DELETE",
@@ -183,13 +200,18 @@ export class ApiToken {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.ApiTokenOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {

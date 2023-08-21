@@ -3,10 +3,10 @@
  */
 
 import * as core from "../../../../core";
-import urlJoin from "url-join";
-import * as errors from "../../../../errors";
 import * as SuperAgent from "../../..";
+import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
+import * as errors from "../../../../errors";
 
 export declare namespace User {
     interface Options {
@@ -18,7 +18,7 @@ export declare namespace User {
 export class User {
     constructor(protected readonly _options: User.Options) {}
 
-    public async readUserMe(): Promise<unknown> {
+    public async readUserMe(): Promise<SuperAgent.UserOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/users/me"),
             method: "GET",
@@ -26,13 +26,18 @@ export class User {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.UserOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -60,7 +65,7 @@ export class User {
     /**
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async readUser(userId: string): Promise<unknown> {
+    public async readUser(userId: string): Promise<SuperAgent.UserOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/users/${userId}`),
             method: "GET",
@@ -68,13 +73,18 @@ export class User {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.UserOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {

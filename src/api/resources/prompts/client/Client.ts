@@ -3,10 +3,10 @@
  */
 
 import * as core from "../../../../core";
-import urlJoin from "url-join";
-import * as errors from "../../../../errors";
 import * as SuperAgent from "../../..";
+import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
+import * as errors from "../../../../errors";
 
 export declare namespace Prompts {
     interface Options {
@@ -21,7 +21,7 @@ export class Prompts {
     /**
      * List all prompts
      */
-    public async listPrompts(): Promise<unknown> {
+    public async listPrompts(): Promise<SuperAgent.PromptListOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/prompts"),
             method: "GET",
@@ -29,13 +29,18 @@ export class Prompts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.PromptListOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -64,7 +69,7 @@ export class Prompts {
      * Create a new prompt
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async createAPrompt(request: SuperAgent.Prompt): Promise<unknown> {
+    public async createAPrompt(request: SuperAgent.AppLibModelsPromptPrompt): Promise<SuperAgent.PromptOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/prompts"),
             method: "POST",
@@ -72,14 +77,19 @@ export class Prompts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
-            body: await serializers.Prompt.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.AppLibModelsPromptPrompt.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.PromptOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -120,7 +130,7 @@ export class Prompts {
      * Get a specific prompt
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async getPrompt(promptId: string): Promise<unknown> {
+    public async getPrompt(promptId: string): Promise<SuperAgent.PromptOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/prompts/${promptId}`),
             method: "GET",
@@ -128,13 +138,18 @@ export class Prompts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.PromptOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -175,7 +190,7 @@ export class Prompts {
      * Patch a specific prompt
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async patchPrompt(promptId: string, request: Record<string, unknown>): Promise<unknown> {
+    public async patchPrompt(promptId: string, request: Record<string, unknown>): Promise<SuperAgent.PromptOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/prompts/${promptId}`),
             method: "PATCH",
@@ -183,7 +198,7 @@ export class Prompts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             body: await serializers.prompts.patchPrompt.Request.jsonOrThrow(request, {
@@ -192,7 +207,12 @@ export class Prompts {
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.PromptOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -233,7 +253,7 @@ export class Prompts {
      * Delete a specific prompt
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async deletePrompt(promptId: string): Promise<unknown> {
+    public async deletePrompt(promptId: string): Promise<SuperAgent.PromptOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/prompts/${promptId}`),
             method: "DELETE",
@@ -241,13 +261,18 @@ export class Prompts {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.PromptOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {

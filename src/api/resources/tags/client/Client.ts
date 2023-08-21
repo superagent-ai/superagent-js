@@ -3,10 +3,10 @@
  */
 
 import * as core from "../../../../core";
-import urlJoin from "url-join";
-import * as errors from "../../../../errors";
 import * as SuperAgent from "../../..";
+import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
+import * as errors from "../../../../errors";
 
 export declare namespace Tags {
     interface Options {
@@ -21,7 +21,7 @@ export class Tags {
     /**
      * List all tags
      */
-    public async listTags(): Promise<unknown> {
+    public async listTags(): Promise<SuperAgent.TagListOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/tags"),
             method: "GET",
@@ -29,13 +29,18 @@ export class Tags {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.TagListOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -64,7 +69,7 @@ export class Tags {
      * Create a new tag
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async createATag(request: SuperAgent.Tag): Promise<unknown> {
+    public async createATag(request: SuperAgent.AppLibModelsTagTag): Promise<SuperAgent.TagOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/tags"),
             method: "POST",
@@ -72,14 +77,19 @@ export class Tags {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
-            body: await serializers.Tag.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.AppLibModelsTagTag.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.TagOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -120,7 +130,7 @@ export class Tags {
      * Get a specific tag
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async getTag(tagId: string): Promise<unknown> {
+    public async getTag(tagId: string): Promise<SuperAgent.TagOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/tags/${tagId}`),
             method: "GET",
@@ -128,13 +138,18 @@ export class Tags {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.TagOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -175,7 +190,7 @@ export class Tags {
      * Patch a specific tag
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async patchTag(tagId: string, request: Record<string, unknown>): Promise<unknown> {
+    public async patchTag(tagId: string, request: Record<string, unknown>): Promise<SuperAgent.TagOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/tags/${tagId}`),
             method: "PATCH",
@@ -183,14 +198,19 @@ export class Tags {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             body: await serializers.tags.patchTag.Request.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.TagOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -231,7 +251,7 @@ export class Tags {
      * Delete a specific tag
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async deleteTag(tagId: string): Promise<unknown> {
+    public async deleteTag(tagId: string): Promise<SuperAgent.TagOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/tags/${tagId}`),
             method: "DELETE",
@@ -239,13 +259,18 @@ export class Tags {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.TagOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {

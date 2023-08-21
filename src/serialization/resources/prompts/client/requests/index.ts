@@ -1,1 +1,1 @@
-export { Prompt } from "./Prompt";
+export { AppLibModelsPromptPrompt } from "./AppLibModelsPromptPrompt";

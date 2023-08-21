@@ -1,2 +1,2 @@
-export { Agent } from "./Agent";
+export { AppLibModelsAgentAgent } from "./AppLibModelsAgentAgent";
 export { PredictAgent } from "./PredictAgent";

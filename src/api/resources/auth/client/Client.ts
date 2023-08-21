@@ -21,7 +21,7 @@ export class Auth {
     /**
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async signIn(request: SuperAgent.SignIn): Promise<unknown> {
+    public async signIn(request: SuperAgent.SignIn): Promise<SuperAgent.SignInOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/auth/sign-in"),
             method: "POST",
@@ -29,14 +29,19 @@ export class Auth {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             body: await serializers.SignIn.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.SignInOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -76,7 +81,7 @@ export class Auth {
     /**
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async signUp(request: SuperAgent.SignUp): Promise<unknown> {
+    public async signUp(request: SuperAgent.SignUp): Promise<SuperAgent.SignInOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/auth/sign-up"),
             method: "POST",
@@ -84,14 +89,19 @@ export class Auth {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             body: await serializers.SignUp.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.SignInOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -139,7 +149,7 @@ export class Auth {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             body: await serializers.OAuth.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),

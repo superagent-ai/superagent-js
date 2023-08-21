@@ -1,1 +1,1 @@
-export { AgentTool } from "./AgentTool";
+export { AppLibModelsAgentToolAgentTool } from "./AppLibModelsAgentToolAgentTool";

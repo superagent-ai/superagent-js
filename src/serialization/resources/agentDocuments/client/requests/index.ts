@@ -1,1 +1,1 @@
-export { AgentDocument } from "./AgentDocument";
+export { AppLibModelsAgentDocumentAgentDocument } from "./AppLibModelsAgentDocumentAgentDocument";

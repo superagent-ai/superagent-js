@@ -3,10 +3,10 @@
  */
 
 import * as core from "../../../../core";
-import urlJoin from "url-join";
-import * as errors from "../../../../errors";
 import * as SuperAgent from "../../..";
+import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
+import * as errors from "../../../../errors";
 
 export declare namespace Documents {
     interface Options {
@@ -21,7 +21,7 @@ export class Documents {
     /**
      * List all documents
      */
-    public async listDocuments(): Promise<unknown> {
+    public async listDocuments(): Promise<SuperAgent.DocumentListOutput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/documents"),
             method: "GET",
@@ -29,13 +29,18 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.DocumentListOutput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -64,7 +69,7 @@ export class Documents {
      * Create a new document
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async createDocument(request: SuperAgent.Document): Promise<unknown> {
+    public async createDocument(request: SuperAgent.AppLibModelsDocumentDocument): Promise<SuperAgent.DocumentOuput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/documents"),
             method: "POST",
@@ -72,14 +77,21 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
-            body: await serializers.Document.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.AppLibModelsDocumentDocument.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.DocumentOuput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -120,7 +132,7 @@ export class Documents {
      * Get a specific document
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async getDocument(documentId: string): Promise<unknown> {
+    public async getDocument(documentId: string): Promise<SuperAgent.DocumentOuput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/documents/${documentId}`),
             method: "GET",
@@ -128,13 +140,18 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.DocumentOuput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -175,7 +192,10 @@ export class Documents {
      * Patch a specific document
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async patchDocument(documentId: string, request: Record<string, unknown>): Promise<unknown> {
+    public async patchDocument(
+        documentId: string,
+        request: Record<string, unknown>
+    ): Promise<SuperAgent.DocumentOuput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/documents/${documentId}`),
             method: "PATCH",
@@ -183,7 +203,7 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             body: await serializers.documents.patchDocument.Request.jsonOrThrow(request, {
@@ -192,7 +212,12 @@ export class Documents {
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.DocumentOuput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -233,7 +258,7 @@ export class Documents {
      * Delete a specific document
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async deleteDocument(documentId: string): Promise<unknown> {
+    public async deleteDocument(documentId: string): Promise<SuperAgent.DocumentOuput> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/documents/${documentId}`),
             method: "DELETE",
@@ -241,13 +266,18 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.54",
+                "X-Fern-SDK-Version": "v0.0.55",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.DocumentOuput.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {

@@ -1,1 +1,1 @@
-export { ApiToken } from "./ApiToken";
+export { AppLibModelsApiTokenApiToken } from "./AppLibModelsApiTokenApiToken";
