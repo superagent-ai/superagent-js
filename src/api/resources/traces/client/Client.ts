@@ -27,7 +27,7 @@ export class Traces {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.57",
+                "X-Fern-SDK-Version": "v0.0.58",
             },
             contentType: "application/json",
             timeoutMs: 60000,
