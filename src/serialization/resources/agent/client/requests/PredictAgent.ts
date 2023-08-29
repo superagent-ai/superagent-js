@@ -11,6 +11,7 @@ export const PredictAgent: core.serialization.Schema<serializers.PredictAgent.Ra
         input: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
         hasStreaming: core.serialization.property("has_streaming", core.serialization.boolean().optional()),
         session: core.serialization.string().optional(),
+        cacheTtl: core.serialization.property("cache_ttl", core.serialization.number().optional()),
     });
 
 export declare namespace PredictAgent {
@@ -18,5 +19,6 @@ export declare namespace PredictAgent {
         input: Record<string, unknown>;
         has_streaming?: boolean | null;
         session?: string | null;
+        cache_ttl?: number | null;
     }
 }
