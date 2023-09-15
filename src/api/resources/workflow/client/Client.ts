@@ -8,22 +8,22 @@ import urlJoin from "url-join";
 import * as serializers from "../../../../serialization";
 import * as errors from "../../../../errors";
 
-export declare namespace Agent {
+export declare namespace Workflow {
     interface Options {
         environment: core.Supplier<string>;
         token?: core.Supplier<core.BearerToken | undefined>;
     }
 }
 
-export class Agent {
-    constructor(protected readonly _options: Agent.Options) {}
+export class Workflow {
+    constructor(protected readonly _options: Workflow.Options) {}
 
     /**
-     * List all agents
+     * List all workflows
      */
-    public async list(): Promise<SuperAgent.AgentList> {
+    public async list(): Promise<SuperAgent.WorkflowList> {
         const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/agents"),
+            url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/workflows"),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
@@ -35,7 +35,7 @@ export class Agent {
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return await serializers.AgentList.parseOrThrow(_response.body, {
+            return await serializers.WorkflowList.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -66,12 +66,12 @@ export class Agent {
     }
 
     /**
-     * Create a new agent
+     * Create a new workflow
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async create(request: SuperAgent.AppModelsRequestAgent): Promise<SuperAgent.AppModelsResponseAgent> {
+    public async create(request: SuperAgent.AppModelsRequestWorkflow): Promise<SuperAgent.AppModelsResponseWorkflow> {
         const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/agents"),
+            url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/workflows"),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
@@ -80,11 +80,11 @@ export class Agent {
                 "X-Fern-SDK-Version": "v0.0.99",
             },
             contentType: "application/json",
-            body: await serializers.AppModelsRequestAgent.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.AppModelsRequestWorkflow.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return await serializers.AppModelsResponseAgent.parseOrThrow(_response.body, {
+            return await serializers.AppModelsResponseWorkflow.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -127,12 +127,12 @@ export class Agent {
     }
 
     /**
-     * Get a single agent
+     * Get a single workflow
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async get(agentId: string): Promise<SuperAgent.AppModelsResponseAgent> {
+    public async get(workflowId: string): Promise<SuperAgent.AppModelsResponseWorkflow> {
         const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}`),
+            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/workflows/${workflowId}`),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
@@ -144,7 +144,7 @@ export class Agent {
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return await serializers.AppModelsResponseAgent.parseOrThrow(_response.body, {
+            return await serializers.AppModelsResponseWorkflow.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -187,15 +187,15 @@ export class Agent {
     }
 
     /**
-     * Patch an agent
+     * Patch a workflow
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
     public async update(
-        agentId: string,
-        request: SuperAgent.AppModelsRequestAgent
-    ): Promise<SuperAgent.AppModelsResponseAgent> {
+        workflowId: string,
+        request: SuperAgent.AppModelsRequestWorkflow
+    ): Promise<SuperAgent.AppModelsResponseWorkflow> {
         const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}`),
+            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/workflows/${workflowId}`),
             method: "PATCH",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
@@ -204,11 +204,11 @@ export class Agent {
                 "X-Fern-SDK-Version": "v0.0.99",
             },
             contentType: "application/json",
-            body: await serializers.AppModelsRequestAgent.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.AppModelsRequestWorkflow.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return await serializers.AppModelsResponseAgent.parseOrThrow(_response.body, {
+            return await serializers.AppModelsResponseWorkflow.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -251,12 +251,12 @@ export class Agent {
     }
 
     /**
-     * Delete an agent
+     * Delete a specific workflow
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async delete(agentId: string): Promise<unknown> {
+    public async delete(workflowId: string): Promise<unknown> {
         const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}`),
+            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/workflows/${workflowId}`),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
@@ -306,15 +306,12 @@ export class Agent {
     }
 
     /**
-     * Invoke an agent
+     * Invoke a specific workflow
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async invoke(
-        agentId: string,
-        request: SuperAgent.AppModelsRequestAgentInvoke
-    ): Promise<SuperAgent.AppModelsResponseAgentInvoke> {
+    public async invoke(workflowId: string, request: SuperAgent.WorkflowInvoke): Promise<unknown> {
         const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}/invoke`),
+            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/workflows/${workflowId}/invoke`),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
@@ -323,130 +320,7 @@ export class Agent {
                 "X-Fern-SDK-Version": "v0.0.99",
             },
             contentType: "application/json",
-            body: await serializers.AppModelsRequestAgentInvoke.jsonOrThrow(request, {
-                unrecognizedObjectKeys: "strip",
-            }),
-            timeoutMs: 60000,
-        });
-        if (_response.ok) {
-            return await serializers.AppModelsResponseAgentInvoke.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new SuperAgent.UnprocessableEntityError(
-                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
-                    throw new errors.SuperAgentError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.SuperAgentError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.SuperAgentTimeoutError();
-            case "unknown":
-                throw new errors.SuperAgentError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Add LLM to agent
-     * @throws {@link SuperAgent.UnprocessableEntityError}
-     */
-    public async addLlm(agentId: string, request: SuperAgent.AgentLlm): Promise<SuperAgent.AppModelsResponseAgent> {
-        const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}/llms`),
-            method: "POST",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
-            },
-            contentType: "application/json",
-            body: await serializers.AgentLlm.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
-            timeoutMs: 60000,
-        });
-        if (_response.ok) {
-            return await serializers.AppModelsResponseAgent.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new SuperAgent.UnprocessableEntityError(
-                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
-                    throw new errors.SuperAgentError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.SuperAgentError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.SuperAgentTimeoutError();
-            case "unknown":
-                throw new errors.SuperAgentError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Remove LLM from agent
-     * @throws {@link SuperAgent.UnprocessableEntityError}
-     */
-    public async removeLlm(agentId: string, llmId: string): Promise<unknown> {
-        const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}/llms/${llmId}`),
-            method: "DELETE",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
-            },
-            contentType: "application/json",
+            body: await serializers.WorkflowInvoke.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
@@ -488,12 +362,12 @@ export class Agent {
     }
 
     /**
-     * List agent tools
+     * List all steps of a workflow
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async listTools(agentId: string): Promise<SuperAgent.AgentToolList> {
+    public async listSteps(workflowId: string): Promise<SuperAgent.WorkflowList> {
         const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}/tools`),
+            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/workflows/${workflowId}/steps`),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
@@ -505,7 +379,7 @@ export class Agent {
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return await serializers.AgentToolList.parseOrThrow(_response.body, {
+            return await serializers.WorkflowList.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -548,12 +422,15 @@ export class Agent {
     }
 
     /**
-     * Add tool to agent
+     * Create a new workflow step
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async addTool(agentId: string, request: SuperAgent.AgentTool): Promise<SuperAgent.AppModelsResponseAgent> {
+    public async addStep(
+        workflowId: string,
+        request: SuperAgent.WorkflowStep
+    ): Promise<SuperAgent.AppModelsResponseWorkflow> {
         const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}/tools`),
+            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/workflows/${workflowId}/steps`),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
@@ -562,11 +439,11 @@ export class Agent {
                 "X-Fern-SDK-Version": "v0.0.99",
             },
             contentType: "application/json",
-            body: await serializers.AgentTool.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.WorkflowStep.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return await serializers.AppModelsResponseAgent.parseOrThrow(_response.body, {
+            return await serializers.AppModelsResponseWorkflow.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -609,14 +486,14 @@ export class Agent {
     }
 
     /**
-     * Remove tool from agent
+     * Delete a specific workflow step
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async removeTool(agentId: string, toolId: string): Promise<unknown> {
+    public async deleteStep(workflowId: string, stepId: string): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
                 await core.Supplier.get(this._options.environment),
-                `api/v1/agents/${agentId}/tools/${toolId}`
+                `api/v1/workflows/${workflowId}/steps/${stepId}`
             ),
             method: "DELETE",
             headers: {
@@ -630,248 +507,6 @@ export class Agent {
         });
         if (_response.ok) {
             return _response.body;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new SuperAgent.UnprocessableEntityError(
-                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
-                    throw new errors.SuperAgentError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.SuperAgentError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.SuperAgentTimeoutError();
-            case "unknown":
-                throw new errors.SuperAgentError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * List agent datasources
-     * @throws {@link SuperAgent.UnprocessableEntityError}
-     */
-    public async listDatasources(agentId: string): Promise<SuperAgent.AgentDatasosurceList> {
-        const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}/datasources`),
-            method: "GET",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
-            },
-            contentType: "application/json",
-            timeoutMs: 60000,
-        });
-        if (_response.ok) {
-            return await serializers.AgentDatasosurceList.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new SuperAgent.UnprocessableEntityError(
-                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
-                    throw new errors.SuperAgentError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.SuperAgentError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.SuperAgentTimeoutError();
-            case "unknown":
-                throw new errors.SuperAgentError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Add datasource to agent
-     * @throws {@link SuperAgent.UnprocessableEntityError}
-     */
-    public async addDatasource(
-        agentId: string,
-        request: SuperAgent.AgentDatasource
-    ): Promise<SuperAgent.AppModelsResponseAgent> {
-        const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}/datasources`),
-            method: "POST",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
-            },
-            contentType: "application/json",
-            body: await serializers.AgentDatasource.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
-            timeoutMs: 60000,
-        });
-        if (_response.ok) {
-            return await serializers.AppModelsResponseAgent.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new SuperAgent.UnprocessableEntityError(
-                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
-                    throw new errors.SuperAgentError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.SuperAgentError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.SuperAgentTimeoutError();
-            case "unknown":
-                throw new errors.SuperAgentError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Remove datasource from agent
-     * @throws {@link SuperAgent.UnprocessableEntityError}
-     */
-    public async removeDatasource(agentId: string, datasourceId: string): Promise<unknown> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                await core.Supplier.get(this._options.environment),
-                `api/v1/agents/${agentId}/datasources/${datasourceId}`
-            ),
-            method: "DELETE",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
-            },
-            contentType: "application/json",
-            timeoutMs: 60000,
-        });
-        if (_response.ok) {
-            return _response.body;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new SuperAgent.UnprocessableEntityError(
-                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
-                    throw new errors.SuperAgentError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.SuperAgentError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.SuperAgentTimeoutError();
-            case "unknown":
-                throw new errors.SuperAgentError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * List agent runs
-     * @throws {@link SuperAgent.UnprocessableEntityError}
-     */
-    public async listRuns(agentId: string): Promise<SuperAgent.AgentRunList> {
-        const _response = await core.fetcher({
-            url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}/runs`),
-            method: "GET",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
-            },
-            contentType: "application/json",
-            timeoutMs: 60000,
-        });
-        if (_response.ok) {
-            return await serializers.AgentRunList.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
         }
 
         if (_response.error.reason === "status-code") {

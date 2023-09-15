@@ -4,16 +4,11 @@
 
 import * as core from "./core";
 import { Agent } from "./api/resources/agent/client/Client";
-import { AgentDocuments } from "./api/resources/agentDocuments/client/Client";
-import { Tags } from "./api/resources/tags/client/Client";
-import { AgentTools } from "./api/resources/agentTools/client/Client";
-import { Auth } from "./api/resources/auth/client/Client";
-import { User } from "./api/resources/user/client/Client";
-import { ApiToken } from "./api/resources/apiToken/client/Client";
-import { Documents } from "./api/resources/documents/client/Client";
-import { Prompts } from "./api/resources/prompts/client/Client";
-import { Tools } from "./api/resources/tools/client/Client";
-import { Traces } from "./api/resources/traces/client/Client";
+import { Llm } from "./api/resources/llm/client/Client";
+import { ApiUser } from "./api/resources/apiUser/client/Client";
+import { Datasource } from "./api/resources/datasource/client/Client";
+import { Tool } from "./api/resources/tool/client/Client";
+import { Workflow } from "./api/resources/workflow/client/Client";
 
 export declare namespace SuperAgentClient {
     interface Options {
@@ -31,63 +26,33 @@ export class SuperAgentClient {
         return (this._agent ??= new Agent(this._options));
     }
 
-    protected _agentDocuments: AgentDocuments | undefined;
+    protected _llm: Llm | undefined;
 
-    public get agentDocuments(): AgentDocuments {
-        return (this._agentDocuments ??= new AgentDocuments(this._options));
+    public get llm(): Llm {
+        return (this._llm ??= new Llm(this._options));
     }
 
-    protected _tags: Tags | undefined;
+    protected _apiUser: ApiUser | undefined;
 
-    public get tags(): Tags {
-        return (this._tags ??= new Tags(this._options));
+    public get apiUser(): ApiUser {
+        return (this._apiUser ??= new ApiUser(this._options));
     }
 
-    protected _agentTools: AgentTools | undefined;
+    protected _datasource: Datasource | undefined;
 
-    public get agentTools(): AgentTools {
-        return (this._agentTools ??= new AgentTools(this._options));
+    public get datasource(): Datasource {
+        return (this._datasource ??= new Datasource(this._options));
     }
 
-    protected _auth: Auth | undefined;
+    protected _tool: Tool | undefined;
 
-    public get auth(): Auth {
-        return (this._auth ??= new Auth(this._options));
+    public get tool(): Tool {
+        return (this._tool ??= new Tool(this._options));
     }
 
-    protected _user: User | undefined;
+    protected _workflow: Workflow | undefined;
 
-    public get user(): User {
-        return (this._user ??= new User(this._options));
-    }
-
-    protected _apiToken: ApiToken | undefined;
-
-    public get apiToken(): ApiToken {
-        return (this._apiToken ??= new ApiToken(this._options));
-    }
-
-    protected _documents: Documents | undefined;
-
-    public get documents(): Documents {
-        return (this._documents ??= new Documents(this._options));
-    }
-
-    protected _prompts: Prompts | undefined;
-
-    public get prompts(): Prompts {
-        return (this._prompts ??= new Prompts(this._options));
-    }
-
-    protected _tools: Tools | undefined;
-
-    public get tools(): Tools {
-        return (this._tools ??= new Tools(this._options));
-    }
-
-    protected _traces: Traces | undefined;
-
-    public get traces(): Traces {
-        return (this._traces ??= new Traces(this._options));
+    public get workflow(): Workflow {
+        return (this._workflow ??= new Workflow(this._options));
     }
 }
