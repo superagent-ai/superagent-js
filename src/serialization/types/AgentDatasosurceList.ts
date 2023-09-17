@@ -12,13 +12,13 @@ export const AgentDatasosurceList: core.serialization.ObjectSchema<
 > = core.serialization.object({
     success: core.serialization.boolean(),
     data: core.serialization
-        .list(core.serialization.record(core.serialization.string(), core.serialization.unknown()))
+        .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsAgentDatasource))
         .optional(),
 });
 
 export declare namespace AgentDatasosurceList {
     interface Raw {
         success: boolean;
-        data?: Record<string, unknown>[] | null;
+        data?: serializers.PrismaModelsAgentDatasource.Raw[] | null;
     }
 }

@@ -1,2 +1,2 @@
 export { WorkflowInvoke } from "./WorkflowInvoke";
-export { WorkflowStep } from "./WorkflowStep";
+export { AppModelsRequestWorkflowStep } from "./AppModelsRequestWorkflowStep";

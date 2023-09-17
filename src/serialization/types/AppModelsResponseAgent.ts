@@ -11,12 +11,12 @@ export const AppModelsResponseAgent: core.serialization.ObjectSchema<
     SuperAgent.AppModelsResponseAgent
 > = core.serialization.object({
     success: core.serialization.boolean(),
-    data: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+    data: core.serialization.lazyObject(async () => (await import("..")).PrismaModelsAgent).optional(),
 });
 
 export declare namespace AppModelsResponseAgent {
     interface Raw {
         success: boolean;
-        data?: Record<string, unknown> | null;
+        data?: serializers.PrismaModelsAgent.Raw | null;
     }
 }

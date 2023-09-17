@@ -10,13 +10,13 @@ export const WorkflowList: core.serialization.ObjectSchema<serializers.WorkflowL
     core.serialization.object({
         success: core.serialization.boolean(),
         data: core.serialization
-            .list(core.serialization.record(core.serialization.string(), core.serialization.unknown()))
+            .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsWorkflow))
             .optional(),
     });
 
 export declare namespace WorkflowList {
     interface Raw {
         success: boolean;
-        data?: Record<string, unknown>[] | null;
+        data?: serializers.PrismaModelsWorkflow.Raw[] | null;
     }
 }

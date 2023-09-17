@@ -11,12 +11,12 @@ export const AppModelsResponseWorkflow: core.serialization.ObjectSchema<
     SuperAgent.AppModelsResponseWorkflow
 > = core.serialization.object({
     success: core.serialization.boolean(),
-    data: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+    data: core.serialization.lazyObject(async () => (await import("..")).PrismaModelsWorkflow).optional(),
 });
 
 export declare namespace AppModelsResponseWorkflow {
     interface Raw {
         success: boolean;
-        data?: Record<string, unknown> | null;
+        data?: serializers.PrismaModelsWorkflow.Raw | null;
     }
 }

@@ -21,7 +21,7 @@ export class ApiUser {
     /**
      * Create a new API user
      */
-    public async create(): Promise<SuperAgent.ApiUser> {
+    public async create(): Promise<SuperAgent.AppModelsResponseApiUser> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/api-users"),
             method: "POST",
@@ -29,13 +29,13 @@ export class ApiUser {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return await serializers.ApiUser.parseOrThrow(_response.body, {
+            return await serializers.AppModelsResponseApiUser.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -68,7 +68,7 @@ export class ApiUser {
     /**
      * Get a single api user
      */
-    public async get(): Promise<SuperAgent.ApiUser> {
+    public async get(): Promise<SuperAgent.AppModelsResponseApiUser> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), "api/v1/api-users/me"),
             method: "GET",
@@ -76,13 +76,13 @@ export class ApiUser {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
         });
         if (_response.ok) {
-            return await serializers.ApiUser.parseOrThrow(_response.body, {
+            return await serializers.AppModelsResponseApiUser.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -123,7 +123,7 @@ export class ApiUser {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,

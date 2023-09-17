@@ -29,7 +29,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -77,7 +77,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestWorkflow.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -138,7 +138,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -201,7 +201,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestWorkflow.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -262,7 +262,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -317,7 +317,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             body: await serializers.WorkflowInvoke.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -373,7 +373,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -427,7 +427,7 @@ export class Workflow {
      */
     public async addStep(
         workflowId: string,
-        request: SuperAgent.WorkflowStep
+        request: SuperAgent.AppModelsRequestWorkflowStep
     ): Promise<SuperAgent.AppModelsResponseWorkflow> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/workflows/${workflowId}/steps`),
@@ -436,10 +436,12 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
-            body: await serializers.WorkflowStep.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.AppModelsRequestWorkflowStep.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
@@ -500,7 +502,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,

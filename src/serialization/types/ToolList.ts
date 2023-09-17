@@ -10,13 +10,13 @@ export const ToolList: core.serialization.ObjectSchema<serializers.ToolList.Raw,
     core.serialization.object({
         success: core.serialization.boolean(),
         data: core.serialization
-            .list(core.serialization.record(core.serialization.string(), core.serialization.unknown()))
+            .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsTool))
             .optional(),
     });
 
 export declare namespace ToolList {
     interface Raw {
         success: boolean;
-        data?: Record<string, unknown>[] | null;
+        data?: serializers.PrismaModelsTool.Raw[] | null;
     }
 }

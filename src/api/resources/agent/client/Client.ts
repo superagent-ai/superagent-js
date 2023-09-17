@@ -29,7 +29,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -77,7 +77,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestAgent.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -138,7 +138,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -201,7 +201,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestAgent.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -262,7 +262,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -320,7 +320,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestAgentInvoke.jsonOrThrow(request, {
@@ -375,7 +375,10 @@ export class Agent {
      * Add LLM to agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async addLlm(agentId: string, request: SuperAgent.AgentLlm): Promise<SuperAgent.AppModelsResponseAgent> {
+    public async addLlm(
+        agentId: string,
+        request: SuperAgent.AppModelsRequestAgentLlm
+    ): Promise<SuperAgent.AppModelsResponseAgent> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}/llms`),
             method: "POST",
@@ -383,10 +386,10 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
-            body: await serializers.AgentLlm.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.AppModelsRequestAgentLlm.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
@@ -444,7 +447,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -499,7 +502,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -551,7 +554,10 @@ export class Agent {
      * Add tool to agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async addTool(agentId: string, request: SuperAgent.AgentTool): Promise<SuperAgent.AppModelsResponseAgent> {
+    public async addTool(
+        agentId: string,
+        request: SuperAgent.AppModelsRequestAgentTool
+    ): Promise<SuperAgent.AppModelsResponseAgent> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}/tools`),
             method: "POST",
@@ -559,10 +565,10 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
-            body: await serializers.AgentTool.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.AppModelsRequestAgentTool.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
@@ -623,7 +629,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -678,7 +684,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -732,7 +738,7 @@ export class Agent {
      */
     public async addDatasource(
         agentId: string,
-        request: SuperAgent.AgentDatasource
+        request: SuperAgent.AppModelsRequestAgentDatasource
     ): Promise<SuperAgent.AppModelsResponseAgent> {
         const _response = await core.fetcher({
             url: urlJoin(await core.Supplier.get(this._options.environment), `api/v1/agents/${agentId}/datasources`),
@@ -741,10 +747,12 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
-            body: await serializers.AgentDatasource.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.AppModelsRequestAgentDatasource.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
             timeoutMs: 60000,
         });
         if (_response.ok) {
@@ -805,7 +813,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
@@ -860,7 +868,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.0.99",
+                "X-Fern-SDK-Version": "v0.1.0",
             },
             contentType: "application/json",
             timeoutMs: 60000,
