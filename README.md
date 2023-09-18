@@ -45,7 +45,7 @@ const client = new SuperAgentClient({
 
 const agent = await agent.client.create({
   "name": "My agent",
-  "description: "My agent description",
+  "description": "My agent description",
   "isActive": true,
   "llmModel": "GPT_4_32K_0613",
   "prompt": "You are an AI assistant..."
