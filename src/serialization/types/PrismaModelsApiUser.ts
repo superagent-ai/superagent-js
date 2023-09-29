@@ -12,6 +12,7 @@ export const PrismaModelsApiUser: core.serialization.ObjectSchema<
 > = core.serialization.object({
     id: core.serialization.string(),
     token: core.serialization.string().optional(),
+    email: core.serialization.string().optional(),
     createdAt: core.serialization.date(),
     updatedAt: core.serialization.date(),
     agents: core.serialization
@@ -35,6 +36,7 @@ export declare namespace PrismaModelsApiUser {
     interface Raw {
         id: string;
         token?: string | null;
+        email?: string | null;
         createdAt: string;
         updatedAt: string;
         agents?: serializers.PrismaModelsAgent.Raw[] | null;

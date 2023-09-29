@@ -5,9 +5,10 @@
 /**
  * An enumeration.
  */
-export type DatasourceStatus = "IN_PROGRESS" | "DONE";
+export type DatasourceStatus = "IN_PROGRESS" | "DONE" | "FAILED";
 
 export const DatasourceStatus = {
     InProgress: "IN_PROGRESS",
     Done: "DONE",
+    Failed: "FAILED",
 } as const;

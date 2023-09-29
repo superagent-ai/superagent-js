@@ -9,6 +9,10 @@ export type DatasourceType =
     | "TXT"
     | "PDF"
     | "CSV"
+    | "PPTX"
+    | "XLSX"
+    | "DOCX"
+    | "GOOGLE_DOC"
     | "YOUTUBE"
     | "GITHUB_REPOSITORY"
     | "MARKDOWN"
@@ -24,6 +28,10 @@ export const DatasourceType = {
     Txt: "TXT",
     Pdf: "PDF",
     Csv: "CSV",
+    Pptx: "PPTX",
+    Xlsx: "XLSX",
+    Docx: "DOCX",
+    GoogleDoc: "GOOGLE_DOC",
     Youtube: "YOUTUBE",
     GithubRepository: "GITHUB_REPOSITORY",
     Markdown: "MARKDOWN",

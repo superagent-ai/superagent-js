@@ -3,6 +3,8 @@ node_modules
 /dist
 /Client.d.ts
 /Client.js
+/environments.d.ts
+/environments.js
 /index.d.ts
 /index.js
 /api

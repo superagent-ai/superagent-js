@@ -15,7 +15,8 @@ export type ToolType =
     | "OPENAPI"
     | "CHATGPT_PLUGIN"
     | "METAPHOR"
-    | "PUBMED";
+    | "PUBMED"
+    | "CODE_EXECUTOR";
 
 export const ToolType = {
     Browser: "BROWSER",
@@ -28,4 +29,5 @@ export const ToolType = {
     ChatgptPlugin: "CHATGPT_PLUGIN",
     Metaphor: "METAPHOR",
     Pubmed: "PUBMED",
+    CodeExecutor: "CODE_EXECUTOR",
 } as const;

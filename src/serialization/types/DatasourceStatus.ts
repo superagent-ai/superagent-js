@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const DatasourceStatus: core.serialization.Schema<
     serializers.DatasourceStatus.Raw,
     SuperAgent.DatasourceStatus
-> = core.serialization.enum_(["IN_PROGRESS", "DONE"]);
+> = core.serialization.enum_(["IN_PROGRESS", "DONE", "FAILED"]);
 
 export declare namespace DatasourceStatus {
-    type Raw = "IN_PROGRESS" | "DONE";
+    type Raw = "IN_PROGRESS" | "DONE" | "FAILED";
 }

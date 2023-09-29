@@ -18,6 +18,7 @@ export const ToolType: core.serialization.Schema<serializers.ToolType.Raw, Super
         "CHATGPT_PLUGIN",
         "METAPHOR",
         "PUBMED",
+        "CODE_EXECUTOR",
     ]);
 
 export declare namespace ToolType {
@@ -31,5 +32,6 @@ export declare namespace ToolType {
         | "OPENAPI"
         | "CHATGPT_PLUGIN"
         | "METAPHOR"
-        | "PUBMED";
+        | "PUBMED"
+        | "CODE_EXECUTOR";
 }

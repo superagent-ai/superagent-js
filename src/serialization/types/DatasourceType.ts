@@ -11,6 +11,10 @@ export const DatasourceType: core.serialization.Schema<serializers.DatasourceTyp
         "TXT",
         "PDF",
         "CSV",
+        "PPTX",
+        "XLSX",
+        "DOCX",
+        "GOOGLE_DOC",
         "YOUTUBE",
         "GITHUB_REPOSITORY",
         "MARKDOWN",
@@ -28,6 +32,10 @@ export declare namespace DatasourceType {
         | "TXT"
         | "PDF"
         | "CSV"
+        | "PPTX"
+        | "XLSX"
+        | "DOCX"
+        | "GOOGLE_DOC"
         | "YOUTUBE"
         | "GITHUB_REPOSITORY"
         | "MARKDOWN"

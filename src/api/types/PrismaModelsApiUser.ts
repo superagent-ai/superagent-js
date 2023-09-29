@@ -10,6 +10,7 @@ import * as SuperAgent from "..";
 export interface PrismaModelsApiUser {
     id: string;
     token?: string;
+    email?: string;
     createdAt: Date;
     updatedAt: Date;
     agents?: SuperAgent.PrismaModelsAgent[];
