@@ -12,6 +12,7 @@ export const PrismaModelsDatasource: core.serialization.ObjectSchema<
 > = core.serialization.object({
     id: core.serialization.string(),
     name: core.serialization.string(),
+    content: core.serialization.string().optional(),
     description: core.serialization.string().optional(),
     url: core.serialization.string().optional(),
     type: core.serialization.lazy(async () => (await import("..")).DatasourceType),
@@ -30,6 +31,7 @@ export declare namespace PrismaModelsDatasource {
     interface Raw {
         id: string;
         name: string;
+        content?: string | null;
         description?: string | null;
         url?: string | null;
         type: serializers.DatasourceType.Raw;

@@ -7,8 +7,8 @@ import * as SuperAgent from "../../api";
 import * as core from "../../core";
 
 export const LlmProvider: core.serialization.Schema<serializers.LlmProvider.Raw, SuperAgent.LlmProvider> =
-    core.serialization.stringLiteral("OPENAI");
+    core.serialization.enum_(["OPENAI", "AZURE_OPENAI"]);
 
 export declare namespace LlmProvider {
-    type Raw = "OPENAI";
+    type Raw = "OPENAI" | "AZURE_OPENAI";
 }

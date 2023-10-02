@@ -27,7 +27,7 @@ export const PrismaModelsApiUser: core.serialization.ObjectSchema<
     tools: core.serialization
         .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsTool))
         .optional(),
-    worflows: core.serialization
+    workflows: core.serialization
         .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsWorkflow))
         .optional(),
 });
@@ -43,6 +43,6 @@ export declare namespace PrismaModelsApiUser {
         llms?: serializers.PrismaModelsLlm.Raw[] | null;
         datasources?: serializers.PrismaModelsDatasource.Raw[] | null;
         tools?: serializers.PrismaModelsTool.Raw[] | null;
-        worflows?: serializers.PrismaModelsWorkflow.Raw[] | null;
+        workflows?: serializers.PrismaModelsWorkflow.Raw[] | null;
     }
 }

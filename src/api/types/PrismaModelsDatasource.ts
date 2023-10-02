@@ -10,6 +10,7 @@ import * as SuperAgent from "..";
 export interface PrismaModelsDatasource {
     id: string;
     name: string;
+    content?: string;
     description?: string;
     url?: string;
     type: SuperAgent.DatasourceType;

@@ -17,5 +17,5 @@ export interface PrismaModelsApiUser {
     llms?: SuperAgent.PrismaModelsLlm[];
     datasources?: SuperAgent.PrismaModelsDatasource[];
     tools?: SuperAgent.PrismaModelsTool[];
-    worflows?: SuperAgent.PrismaModelsWorkflow[];
+    workflows?: SuperAgent.PrismaModelsWorkflow[];
 }
