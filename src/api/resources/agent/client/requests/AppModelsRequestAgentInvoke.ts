@@ -6,4 +6,5 @@ export interface AppModelsRequestAgentInvoke {
     input: string;
     sessionId?: string;
     enableStreaming: boolean;
+    outputSchema?: string;
 }

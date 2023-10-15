@@ -13,6 +13,7 @@ export const AppModelsRequestAgentInvoke: core.serialization.Schema<
     input: core.serialization.string(),
     sessionId: core.serialization.string().optional(),
     enableStreaming: core.serialization.boolean(),
+    outputSchema: core.serialization.string().optional(),
 });
 
 export declare namespace AppModelsRequestAgentInvoke {
@@ -20,5 +21,6 @@ export declare namespace AppModelsRequestAgentInvoke {
         input: string;
         sessionId?: string | null;
         enableStreaming: boolean;
+        outputSchema?: string | null;
     }
 }
