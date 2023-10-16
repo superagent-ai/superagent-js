@@ -5,6 +5,7 @@
 export interface AppModelsRequestAgent {
     isActive?: boolean;
     name: string;
+    initialMessage?: string;
     prompt?: string;
     llmModel: string;
     description: string;

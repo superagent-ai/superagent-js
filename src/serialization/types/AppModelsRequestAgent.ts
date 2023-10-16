@@ -12,6 +12,7 @@ export const AppModelsRequestAgent: core.serialization.ObjectSchema<
 > = core.serialization.object({
     isActive: core.serialization.boolean().optional(),
     name: core.serialization.string(),
+    initialMessage: core.serialization.string().optional(),
     prompt: core.serialization.string().optional(),
     llmModel: core.serialization.string(),
     description: core.serialization.string(),
@@ -22,6 +23,7 @@ export declare namespace AppModelsRequestAgent {
     interface Raw {
         isActive?: boolean | null;
         name: string;
+        initialMessage?: string | null;
         prompt?: string | null;
         llmModel: string;
         description: string;

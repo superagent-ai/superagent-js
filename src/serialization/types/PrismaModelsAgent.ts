@@ -13,6 +13,7 @@ export const PrismaModelsAgent: core.serialization.ObjectSchema<
     id: core.serialization.string(),
     name: core.serialization.string(),
     avatar: core.serialization.string().optional(),
+    initialMessage: core.serialization.string().optional(),
     description: core.serialization.string(),
     isActive: core.serialization.boolean(),
     createdAt: core.serialization.date(),
@@ -40,6 +41,7 @@ export declare namespace PrismaModelsAgent {
         id: string;
         name: string;
         avatar?: string | null;
+        initialMessage?: string | null;
         description: string;
         isActive: boolean;
         createdAt: string;

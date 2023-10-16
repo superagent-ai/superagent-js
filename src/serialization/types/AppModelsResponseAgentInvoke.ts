@@ -11,12 +11,12 @@ export const AppModelsResponseAgentInvoke: core.serialization.ObjectSchema<
     SuperAgent.AppModelsResponseAgentInvoke
 > = core.serialization.object({
     success: core.serialization.boolean(),
-    data: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
+    data: core.serialization.unknown().optional(),
 });
 
 export declare namespace AppModelsResponseAgentInvoke {
     interface Raw {
         success: boolean;
-        data: Record<string, unknown>;
+        data?: unknown | null;
     }
 }

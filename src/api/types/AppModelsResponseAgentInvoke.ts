@@ -4,5 +4,5 @@
 
 export interface AppModelsResponseAgentInvoke {
     success: boolean;
-    data: Record<string, unknown>;
+    data?: unknown;
 }

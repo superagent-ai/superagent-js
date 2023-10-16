@@ -11,6 +11,7 @@ export interface PrismaModelsAgent {
     id: string;
     name: string;
     avatar?: string;
+    initialMessage?: string;
     description: string;
     isActive: boolean;
     createdAt: Date;
