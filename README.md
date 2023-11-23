@@ -83,25 +83,6 @@ console.log(steps)
 
 ```
 
-## Async Client
-
-```python
-from superagent.client import AsyncSuperagent
-
-agent = await client.agent.create(request={
-    
-})
-
-output = await client.agent.invoke(
-    agent_id=agent.data.id,
-    input="Hi there!",
-    enable_streaming=False,
-    session_id="123"
-)
-
-print("Received response from superagent", agent.data)
-```
-
 ## Acknowledgements
 
 A special thanks to the [Fern](https://buildwithfern.com/) team for all support with the Superagent libraries and SDKS ❤️.
