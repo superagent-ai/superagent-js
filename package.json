@@ -1,6 +1,6 @@
 {
     "name": "superagentai-js",
-    "version": "v0.1.33",
+    "version": "v0.1.36",
     "private": false,
     "repository": "https://github.com/homanp/superagent-js",
     "main": "./index.js",
@@ -13,8 +13,9 @@
     "dependencies": {
         "url-join": "4.0.1",
         "@types/url-join": "4.0.1",
-        "axios": "1.4.0",
-        "@ungap/url-search-params": "0.2.2",
+        "axios": "0.27.2",
+        "qs": "6.11.2",
+        "@types/qs": "6.9.8",
         "js-base64": "3.7.2"
     },
     "devDependencies": {

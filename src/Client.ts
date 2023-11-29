@@ -16,6 +16,11 @@ export declare namespace SuperAgentClient {
         environment?: core.Supplier<environments.SuperAgentEnvironment | string>;
         token?: core.Supplier<core.BearerToken | undefined>;
     }
+
+    interface RequestOptions {
+        timeoutInSeconds?: number;
+        maxRetries?: number;
+    }
 }
 
 export class SuperAgentClient {

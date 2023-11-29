@@ -14,6 +14,11 @@ export declare namespace Tool {
         environment?: core.Supplier<environments.SuperAgentEnvironment | string>;
         token?: core.Supplier<core.BearerToken | undefined>;
     }
+
+    interface RequestOptions {
+        timeoutInSeconds?: number;
+        maxRetries?: number;
+    }
 }
 
 export class Tool {
@@ -22,7 +27,7 @@ export class Tool {
     /**
      * List all tools
      */
-    public async list(): Promise<SuperAgent.ToolList> {
+    public async list(requestOptions?: Tool.RequestOptions): Promise<SuperAgent.ToolList> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
@@ -33,10 +38,11 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.33",
+                "X-Fern-SDK-Version": "v0.1.36",
             },
             contentType: "application/json",
-            timeoutMs: 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
             return await serializers.ToolList.parseOrThrow(_response.body, {
@@ -73,7 +79,10 @@ export class Tool {
      * Create a new tool
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async create(request: SuperAgent.AppModelsRequestTool): Promise<SuperAgent.AppModelsResponseTool> {
+    public async create(
+        request: SuperAgent.AppModelsRequestTool,
+        requestOptions?: Tool.RequestOptions
+    ): Promise<SuperAgent.AppModelsResponseTool> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
@@ -84,11 +93,12 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.33",
+                "X-Fern-SDK-Version": "v0.1.36",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestTool.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
-            timeoutMs: 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
             return await serializers.AppModelsResponseTool.parseOrThrow(_response.body, {
@@ -137,7 +147,7 @@ export class Tool {
      * Get a specific tool
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async get(toolId: string): Promise<SuperAgent.AppModelsResponseTool> {
+    public async get(toolId: string, requestOptions?: Tool.RequestOptions): Promise<SuperAgent.AppModelsResponseTool> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
@@ -148,77 +158,11 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.33",
+                "X-Fern-SDK-Version": "v0.1.36",
             },
             contentType: "application/json",
-            timeoutMs: 60000,
-        });
-        if (_response.ok) {
-            return await serializers.AppModelsResponseTool.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new SuperAgent.UnprocessableEntityError(
-                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
-                    throw new errors.SuperAgentError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.SuperAgentError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.SuperAgentTimeoutError();
-            case "unknown":
-                throw new errors.SuperAgentError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * Update a specific tool
-     * @throws {@link SuperAgent.UnprocessableEntityError}
-     */
-    public async update(
-        toolId: string,
-        request: SuperAgent.AppModelsRequestTool
-    ): Promise<SuperAgent.AppModelsResponseTool> {
-        const _response = await core.fetcher({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
-                `api/v1/tools/${toolId}`
-            ),
-            method: "PATCH",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.33",
-            },
-            contentType: "application/json",
-            body: await serializers.AppModelsRequestTool.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
-            timeoutMs: 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
             return await serializers.AppModelsResponseTool.parseOrThrow(_response.body, {
@@ -267,7 +211,7 @@ export class Tool {
      * Delete a specific tool
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async delete(toolId: string): Promise<unknown> {
+    public async delete(toolId: string, requestOptions?: Tool.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
@@ -278,13 +222,83 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.33",
+                "X-Fern-SDK-Version": "v0.1.36",
             },
             contentType: "application/json",
-            timeoutMs: 60000,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
             return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new SuperAgent.UnprocessableEntityError(
+                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.SuperAgentError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.SuperAgentError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.SuperAgentTimeoutError();
+            case "unknown":
+                throw new errors.SuperAgentError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Update a specific tool
+     * @throws {@link SuperAgent.UnprocessableEntityError}
+     */
+    public async update(
+        toolId: string,
+        request: SuperAgent.AppModelsRequestTool,
+        requestOptions?: Tool.RequestOptions
+    ): Promise<SuperAgent.AppModelsResponseTool> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
+                `api/v1/tools/${toolId}`
+            ),
+            method: "PATCH",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "superagentai-js",
+                "X-Fern-SDK-Version": "v0.1.36",
+            },
+            contentType: "application/json",
+            body: await serializers.AppModelsRequestTool.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+        });
+        if (_response.ok) {
+            return await serializers.AppModelsResponseTool.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {

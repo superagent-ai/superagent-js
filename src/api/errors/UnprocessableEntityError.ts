@@ -8,6 +8,7 @@ import * as SuperAgent from "..";
 export class UnprocessableEntityError extends errors.SuperAgentError {
     constructor(body: SuperAgent.HttpValidationError) {
         super({
+            message: "UnprocessableEntityError",
             statusCode: 422,
             body: body,
         });
