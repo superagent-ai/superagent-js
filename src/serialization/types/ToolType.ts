@@ -8,6 +8,7 @@ import * as core from "../../core";
 
 export const ToolType: core.serialization.Schema<serializers.ToolType.Raw, SuperAgent.ToolType> =
     core.serialization.enum_([
+        "ALGOLIA",
         "BROWSER",
         "BING_SEARCH",
         "REPLICATE",
@@ -19,10 +20,16 @@ export const ToolType: core.serialization.Schema<serializers.ToolType.Raw, Super
         "METAPHOR",
         "PUBMED",
         "CODE_EXECUTOR",
+        "OPENBB",
+        "GPT_VISION",
+        "TTS_1",
+        "HAND_OFF",
+        "FUNCTION",
     ]);
 
 export declare namespace ToolType {
     type Raw =
+        | "ALGOLIA"
         | "BROWSER"
         | "BING_SEARCH"
         | "REPLICATE"
@@ -33,5 +40,10 @@ export declare namespace ToolType {
         | "CHATGPT_PLUGIN"
         | "METAPHOR"
         | "PUBMED"
-        | "CODE_EXECUTOR";
+        | "CODE_EXECUTOR"
+        | "OPENBB"
+        | "GPT_VISION"
+        | "TTS_1"
+        | "HAND_OFF"
+        | "FUNCTION";
 }

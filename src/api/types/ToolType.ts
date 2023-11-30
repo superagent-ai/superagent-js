@@ -6,6 +6,7 @@
  * An enumeration.
  */
 export type ToolType =
+    | "ALGOLIA"
     | "BROWSER"
     | "BING_SEARCH"
     | "REPLICATE"
@@ -16,9 +17,15 @@ export type ToolType =
     | "CHATGPT_PLUGIN"
     | "METAPHOR"
     | "PUBMED"
-    | "CODE_EXECUTOR";
+    | "CODE_EXECUTOR"
+    | "OPENBB"
+    | "GPT_VISION"
+    | "TTS_1"
+    | "HAND_OFF"
+    | "FUNCTION";
 
 export const ToolType = {
+    Algolia: "ALGOLIA",
     Browser: "BROWSER",
     BingSearch: "BING_SEARCH",
     Replicate: "REPLICATE",
@@ -30,4 +37,9 @@ export const ToolType = {
     Metaphor: "METAPHOR",
     Pubmed: "PUBMED",
     CodeExecutor: "CODE_EXECUTOR",
+    Openbb: "OPENBB",
+    GptVision: "GPT_VISION",
+    Tts1: "TTS_1",
+    HandOff: "HAND_OFF",
+    Function: "FUNCTION",
 } as const;
