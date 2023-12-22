@@ -19,4 +19,5 @@ export interface PrismaModelsTool {
     apiUserId: string;
     apiUser?: SuperAgent.PrismaModelsApiUser;
     tools?: SuperAgent.PrismaModelsAgentTool[];
+    toolConfig?: string;
 }

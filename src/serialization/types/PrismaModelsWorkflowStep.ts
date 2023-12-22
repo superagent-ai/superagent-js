@@ -16,8 +16,8 @@ export const PrismaModelsWorkflowStep: core.serialization.ObjectSchema<
     workflow: core.serialization.lazyObject(async () => (await import("..")).PrismaModelsWorkflow).optional(),
     createdAt: core.serialization.date(),
     updatedAt: core.serialization.date(),
-    input: core.serialization.string(),
-    output: core.serialization.string(),
+    input: core.serialization.string().optional(),
+    output: core.serialization.string().optional(),
     agentId: core.serialization.string(),
     agent: core.serialization.lazyObject(async () => (await import("..")).PrismaModelsAgent).optional(),
 });
@@ -30,8 +30,8 @@ export declare namespace PrismaModelsWorkflowStep {
         workflow?: serializers.PrismaModelsWorkflow.Raw | null;
         createdAt: string;
         updatedAt: string;
-        input: string;
-        output: string;
+        input?: string | null;
+        output?: string | null;
         agentId: string;
         agent?: serializers.PrismaModelsAgent.Raw | null;
     }

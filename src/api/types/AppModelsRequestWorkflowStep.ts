@@ -5,6 +5,4 @@
 export interface AppModelsRequestWorkflowStep {
     order: number;
     agentId: string;
-    input: string;
-    output: string;
 }

@@ -14,8 +14,8 @@ export interface PrismaModelsWorkflowStep {
     workflow?: SuperAgent.PrismaModelsWorkflow;
     createdAt: Date;
     updatedAt: Date;
-    input: string;
-    output: string;
+    input?: string;
+    output?: string;
     agentId: string;
     agent?: SuperAgent.PrismaModelsAgent;
 }

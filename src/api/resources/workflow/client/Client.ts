@@ -26,8 +26,22 @@ export class Workflow {
 
     /**
      * List all workflows
+     * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async list(requestOptions?: Workflow.RequestOptions): Promise<SuperAgent.WorkflowList> {
+    public async list(
+        request: SuperAgent.ListApiV1WorkflowsGetRequest = {},
+        requestOptions?: Workflow.RequestOptions
+    ): Promise<SuperAgent.WorkflowList> {
+        const { skip, limit } = request;
+        const _queryParams: Record<string, string | string[]> = {};
+        if (skip != null) {
+            _queryParams["skip"] = skip.toString();
+        }
+
+        if (limit != null) {
+            _queryParams["limit"] = limit.toString();
+        }
+
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
@@ -38,9 +52,10 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.45",
+                "X-Fern-SDK-Version": "v0.1.47",
             },
             contentType: "application/json",
+            queryParameters: _queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
@@ -54,10 +69,22 @@ export class Workflow {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.SuperAgentError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-            });
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new SuperAgent.UnprocessableEntityError(
+                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.SuperAgentError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
         }
 
         switch (_response.error.reason) {
@@ -93,7 +120,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.45",
+                "X-Fern-SDK-Version": "v0.1.47",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestWorkflow.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -161,7 +188,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.45",
+                "X-Fern-SDK-Version": "v0.1.47",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -225,7 +252,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.45",
+                "X-Fern-SDK-Version": "v0.1.47",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -270,33 +297,36 @@ export class Workflow {
     }
 
     /**
-     * Patch a workflow
+     * Patch a workflow step
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
     public async update(
         workflowId: string,
-        request: SuperAgent.AppModelsRequestWorkflow,
+        stepId: string,
+        request: SuperAgent.AppModelsRequestWorkflowStep,
         requestOptions?: Workflow.RequestOptions
-    ): Promise<SuperAgent.AppModelsResponseWorkflow> {
+    ): Promise<SuperAgent.AppModelsResponseWorkflowStep> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
-                `api/v1/workflows/${workflowId}`
+                `api/v1/workflows/${workflowId}/steps/${stepId}`
             ),
             method: "PATCH",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.45",
+                "X-Fern-SDK-Version": "v0.1.47",
             },
             contentType: "application/json",
-            body: await serializers.AppModelsRequestWorkflow.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.AppModelsRequestWorkflowStep.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.AppModelsResponseWorkflow.parseOrThrow(_response.body, {
+            return await serializers.AppModelsResponseWorkflowStep.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -357,7 +387,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.45",
+                "X-Fern-SDK-Version": "v0.1.47",
             },
             contentType: "application/json",
             body: await serializers.WorkflowInvoke.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -409,7 +439,7 @@ export class Workflow {
     public async listSteps(
         workflowId: string,
         requestOptions?: Workflow.RequestOptions
-    ): Promise<SuperAgent.WorkflowList> {
+    ): Promise<SuperAgent.WorkflowStepList> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
@@ -420,14 +450,14 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.45",
+                "X-Fern-SDK-Version": "v0.1.47",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.WorkflowList.parseOrThrow(_response.body, {
+            return await serializers.WorkflowStepList.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -477,7 +507,7 @@ export class Workflow {
         workflowId: string,
         request: SuperAgent.AppModelsRequestWorkflowStep,
         requestOptions?: Workflow.RequestOptions
-    ): Promise<SuperAgent.AppModelsResponseWorkflow> {
+    ): Promise<SuperAgent.AppModelsResponseWorkflowStep> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
@@ -488,7 +518,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.45",
+                "X-Fern-SDK-Version": "v0.1.47",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestWorkflowStep.jsonOrThrow(request, {
@@ -498,7 +528,7 @@ export class Workflow {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.AppModelsResponseWorkflow.parseOrThrow(_response.body, {
+            return await serializers.AppModelsResponseWorkflowStep.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -559,7 +589,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.45",
+                "X-Fern-SDK-Version": "v0.1.47",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,

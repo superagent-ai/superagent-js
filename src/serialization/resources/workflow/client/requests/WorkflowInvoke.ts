@@ -10,11 +10,13 @@ export const WorkflowInvoke: core.serialization.Schema<serializers.WorkflowInvok
     core.serialization.object({
         input: core.serialization.string(),
         enableStreaming: core.serialization.boolean(),
+        sessionId: core.serialization.string().optional(),
     });
 
 export declare namespace WorkflowInvoke {
     interface Raw {
         input: string;
         enableStreaming: boolean;
+        sessionId?: string | null;
     }
 }
