@@ -12,11 +12,13 @@ export const WorkflowList: core.serialization.ObjectSchema<serializers.WorkflowL
         data: core.serialization
             .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsWorkflow))
             .optional(),
+        totalPages: core.serialization.property("total_pages", core.serialization.number()),
     });
 
 export declare namespace WorkflowList {
     interface Raw {
         success: boolean;
         data?: serializers.PrismaModelsWorkflow.Raw[] | null;
+        total_pages: number;
     }
 }

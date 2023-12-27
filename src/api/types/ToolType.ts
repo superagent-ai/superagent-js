@@ -22,7 +22,8 @@ export type ToolType =
     | "GPT_VISION"
     | "TTS_1"
     | "HAND_OFF"
-    | "FUNCTION";
+    | "FUNCTION"
+    | "HTTP";
 
 export const ToolType = {
     Algolia: "ALGOLIA",
@@ -42,4 +43,5 @@ export const ToolType = {
     Tts1: "TTS_1",
     HandOff: "HAND_OFF",
     Function: "FUNCTION",
+    Http: "HTTP",
 } as const;

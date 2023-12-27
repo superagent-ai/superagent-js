@@ -4,5 +4,5 @@
 
 export interface ListApiV1AgentsGetRequest {
     skip?: number;
-    limit?: number;
+    take?: number;
 }

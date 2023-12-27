@@ -7,4 +7,5 @@ import * as SuperAgent from "..";
 export interface WorkflowList {
     success: boolean;
     data?: SuperAgent.PrismaModelsWorkflow[];
+    totalPages: number;
 }

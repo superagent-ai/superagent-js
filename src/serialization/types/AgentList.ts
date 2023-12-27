@@ -12,11 +12,13 @@ export const AgentList: core.serialization.ObjectSchema<serializers.AgentList.Ra
         data: core.serialization
             .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsAgent))
             .optional(),
+        totalPages: core.serialization.property("total_pages", core.serialization.number()),
     });
 
 export declare namespace AgentList {
     interface Raw {
         success: boolean;
         data?: serializers.PrismaModelsAgent.Raw[] | null;
+        total_pages: number;
     }
 }

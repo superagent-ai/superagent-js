@@ -4,5 +4,5 @@
 
 export interface ListApiV1WorkflowsGetRequest {
     skip?: number;
-    limit?: number;
+    take?: number;
 }

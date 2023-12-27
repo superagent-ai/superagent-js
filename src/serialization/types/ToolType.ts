@@ -25,6 +25,7 @@ export const ToolType: core.serialization.Schema<serializers.ToolType.Raw, Super
         "TTS_1",
         "HAND_OFF",
         "FUNCTION",
+        "HTTP",
     ]);
 
 export declare namespace ToolType {
@@ -45,5 +46,6 @@ export declare namespace ToolType {
         | "GPT_VISION"
         | "TTS_1"
         | "HAND_OFF"
-        | "FUNCTION";
+        | "FUNCTION"
+        | "HTTP";
 }
