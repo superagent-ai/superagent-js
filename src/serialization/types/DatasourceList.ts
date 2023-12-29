@@ -14,11 +14,13 @@ export const DatasourceList: core.serialization.ObjectSchema<
     data: core.serialization
         .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsDatasource))
         .optional(),
+    totalPages: core.serialization.property("total_pages", core.serialization.number()),
 });
 
 export declare namespace DatasourceList {
     interface Raw {
         success: boolean;
         data?: serializers.PrismaModelsDatasource.Raw[] | null;
+        total_pages: number;
     }
 }

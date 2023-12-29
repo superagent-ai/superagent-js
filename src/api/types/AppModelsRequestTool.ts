@@ -7,5 +7,5 @@ export interface AppModelsRequestTool {
     description: string;
     type: string;
     metadata?: Record<string, unknown>;
-    returnDirect?: boolean;
+    returnDirect: boolean;
 }

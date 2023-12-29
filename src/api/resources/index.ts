@@ -6,4 +6,6 @@ export * as tool from "./tool";
 export * as workflow from "./workflow";
 export * from "./agent/client/requests";
 export * from "./apiUser/client/requests";
+export * from "./datasource/client/requests";
+export * from "./tool/client/requests";
 export * from "./workflow/client/requests";

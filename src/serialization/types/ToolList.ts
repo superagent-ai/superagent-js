@@ -12,11 +12,13 @@ export const ToolList: core.serialization.ObjectSchema<serializers.ToolList.Raw,
         data: core.serialization
             .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsTool))
             .optional(),
+        totalPages: core.serialization.property("total_pages", core.serialization.number()),
     });
 
 export declare namespace ToolList {
     interface Raw {
         success: boolean;
         data?: serializers.PrismaModelsTool.Raw[] | null;
+        total_pages: number;
     }
 }

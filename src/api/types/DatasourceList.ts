@@ -7,4 +7,5 @@ import * as SuperAgent from "..";
 export interface DatasourceList {
     success: boolean;
     data?: SuperAgent.PrismaModelsDatasource[];
+    totalPages: number;
 }

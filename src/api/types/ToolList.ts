@@ -7,4 +7,5 @@ import * as SuperAgent from "..";
 export interface ToolList {
     success: boolean;
     data?: SuperAgent.PrismaModelsTool[];
+    totalPages: number;
 }

@@ -14,7 +14,7 @@ export const AppModelsRequestTool: core.serialization.ObjectSchema<
     description: core.serialization.string(),
     type: core.serialization.string(),
     metadata: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
-    returnDirect: core.serialization.boolean().optional(),
+    returnDirect: core.serialization.boolean(),
 });
 
 export declare namespace AppModelsRequestTool {
@@ -23,6 +23,6 @@ export declare namespace AppModelsRequestTool {
         description: string;
         type: string;
         metadata?: Record<string, unknown> | null;
-        returnDirect?: boolean | null;
+        returnDirect: boolean;
     }
 }
