@@ -9,7 +9,7 @@ import * as serializers from "../../../../serialization";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors";
 
-export declare namespace ApiUser {
+export declare namespace VectorDatabase {
     interface Options {
         environment?: core.Supplier<environments.SuperAgentEnvironment | string>;
         token?: core.Supplier<core.BearerToken | undefined>;
@@ -21,21 +21,21 @@ export declare namespace ApiUser {
     }
 }
 
-export class ApiUser {
-    constructor(protected readonly _options: ApiUser.Options) {}
+export class VectorDatabase {
+    constructor(protected readonly _options: VectorDatabase.Options) {}
 
     /**
-     * Create a new API user
+     * Create a new Vector Database
      * @throws {@link SuperAgent.UnprocessableEntityError}
      */
     public async create(
-        request: SuperAgent.AppModelsRequestApiUser,
-        requestOptions?: ApiUser.RequestOptions
-    ): Promise<SuperAgent.AppModelsResponseApiUser> {
+        request: SuperAgent.AppModelsRequestVectorDb,
+        requestOptions?: VectorDatabase.RequestOptions
+    ): Promise<SuperAgent.AppModelsResponseVectorDb> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
-                "api/v1/api-users"
+                "api/v1/vector-db"
             ),
             method: "POST",
             headers: {
@@ -45,12 +45,12 @@ export class ApiUser {
                 "X-Fern-SDK-Version": "v0.1.53",
             },
             contentType: "application/json",
-            body: await serializers.AppModelsRequestApiUser.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: await serializers.AppModelsRequestVectorDb.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.AppModelsResponseApiUser.parseOrThrow(_response.body, {
+            return await serializers.AppModelsResponseVectorDb.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -93,13 +93,13 @@ export class ApiUser {
     }
 
     /**
-     * Get a single api user
+     * List all Vector Databases
      */
-    public async get(requestOptions?: ApiUser.RequestOptions): Promise<SuperAgent.AppModelsResponseApiUser> {
+    public async list(requestOptions?: VectorDatabase.RequestOptions): Promise<SuperAgent.VectorDbList> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
-                "api/v1/api-users/me"
+                "api/v1/vector-dbs"
             ),
             method: "GET",
             headers: {
@@ -113,7 +113,7 @@ export class ApiUser {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.AppModelsResponseApiUser.parseOrThrow(_response.body, {
+            return await serializers.VectorDbList.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -144,15 +144,19 @@ export class ApiUser {
     }
 
     /**
-     * Delete an api user
+     * Get a single Vector Database
+     * @throws {@link SuperAgent.UnprocessableEntityError}
      */
-    public async delete(requestOptions?: ApiUser.RequestOptions): Promise<unknown> {
+    public async get(
+        vectorDbId: string,
+        requestOptions?: VectorDatabase.RequestOptions
+    ): Promise<SuperAgent.AppModelsResponseVectorDb> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
-                "api/v1/api-users/me"
+                `api/v1/vector-dbs/${vectorDbId}`
             ),
-            method: "DELETE",
+            method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
@@ -164,14 +168,100 @@ export class ApiUser {
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return _response.body;
+            return await serializers.AppModelsResponseVectorDb.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.SuperAgentError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new SuperAgent.UnprocessableEntityError(
+                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.SuperAgentError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.SuperAgentError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.SuperAgentTimeoutError();
+            case "unknown":
+                throw new errors.SuperAgentError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Patch a Vector Database
+     * @throws {@link SuperAgent.UnprocessableEntityError}
+     */
+    public async update(
+        vectorDbId: string,
+        request: SuperAgent.AppModelsRequestVectorDb,
+        requestOptions?: VectorDatabase.RequestOptions
+    ): Promise<SuperAgent.AppModelsResponseVectorDb> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
+                `api/v1/vector-dbs/${vectorDbId}`
+            ),
+            method: "PATCH",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "superagentai-js",
+                "X-Fern-SDK-Version": "v0.1.53",
+            },
+            contentType: "application/json",
+            body: await serializers.AppModelsRequestVectorDb.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+        });
+        if (_response.ok) {
+            return await serializers.AppModelsResponseVectorDb.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                breadcrumbsPrefix: ["response"],
             });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new SuperAgent.UnprocessableEntityError(
+                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.SuperAgentError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
         }
 
         switch (_response.error.reason) {

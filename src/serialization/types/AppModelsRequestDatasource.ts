@@ -16,6 +16,7 @@ export const AppModelsRequestDatasource: core.serialization.ObjectSchema<
     content: core.serialization.string().optional(),
     url: core.serialization.string().optional(),
     metadata: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+    vectorDbProvider: core.serialization.string().optional(),
 });
 
 export declare namespace AppModelsRequestDatasource {
@@ -26,5 +27,6 @@ export declare namespace AppModelsRequestDatasource {
         content?: string | null;
         url?: string | null;
         metadata?: Record<string, unknown> | null;
+        vectorDbProvider?: string | null;
     }
 }

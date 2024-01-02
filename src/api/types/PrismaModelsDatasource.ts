@@ -21,4 +21,6 @@ export interface PrismaModelsDatasource {
     metadata?: string;
     status: SuperAgent.DatasourceStatus;
     datasources?: SuperAgent.PrismaModelsAgentDatasource[];
+    vectorDb?: SuperAgent.PrismaModelsVectorDb;
+    vectorDbId?: string;
 }

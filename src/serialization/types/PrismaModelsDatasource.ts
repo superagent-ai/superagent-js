@@ -25,6 +25,8 @@ export const PrismaModelsDatasource: core.serialization.ObjectSchema<
     datasources: core.serialization
         .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsAgentDatasource))
         .optional(),
+    vectorDb: core.serialization.lazyObject(async () => (await import("..")).PrismaModelsVectorDb).optional(),
+    vectorDbId: core.serialization.string().optional(),
 });
 
 export declare namespace PrismaModelsDatasource {
@@ -42,5 +44,7 @@ export declare namespace PrismaModelsDatasource {
         metadata?: string | null;
         status: serializers.DatasourceStatus.Raw;
         datasources?: serializers.PrismaModelsAgentDatasource.Raw[] | null;
+        vectorDb?: serializers.PrismaModelsVectorDb.Raw | null;
+        vectorDbId?: string | null;
     }
 }

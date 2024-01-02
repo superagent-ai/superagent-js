@@ -9,4 +9,5 @@ export interface AppModelsRequestDatasource {
     content?: string;
     url?: string;
     metadata?: Record<string, unknown>;
+    vectorDbProvider?: string;
 }

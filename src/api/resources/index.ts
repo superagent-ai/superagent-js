@@ -4,6 +4,7 @@ export * as apiUser from "./apiUser";
 export * as datasource from "./datasource";
 export * as tool from "./tool";
 export * as workflow from "./workflow";
+export * as vectorDatabase from "./vectorDatabase";
 export * from "./agent/client/requests";
 export * from "./apiUser/client/requests";
 export * from "./datasource/client/requests";

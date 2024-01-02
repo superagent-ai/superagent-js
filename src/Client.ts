@@ -10,6 +10,7 @@ import { ApiUser } from "./api/resources/apiUser/client/Client";
 import { Datasource } from "./api/resources/datasource/client/Client";
 import { Tool } from "./api/resources/tool/client/Client";
 import { Workflow } from "./api/resources/workflow/client/Client";
+import { VectorDatabase } from "./api/resources/vectorDatabase/client/Client";
 
 export declare namespace SuperAgentClient {
     interface Options {
@@ -60,5 +61,11 @@ export class SuperAgentClient {
 
     public get workflow(): Workflow {
         return (this._workflow ??= new Workflow(this._options));
+    }
+
+    protected _vectorDatabase: VectorDatabase | undefined;
+
+    public get vectorDatabase(): VectorDatabase {
+        return (this._vectorDatabase ??= new VectorDatabase(this._options));
     }
 }
