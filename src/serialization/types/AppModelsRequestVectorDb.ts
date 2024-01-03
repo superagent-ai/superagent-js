@@ -10,13 +10,13 @@ export const AppModelsRequestVectorDb: core.serialization.ObjectSchema<
     serializers.AppModelsRequestVectorDb.Raw,
     SuperAgent.AppModelsRequestVectorDb
 > = core.serialization.object({
-    provider: core.serialization.string(),
+    provider: core.serialization.lazy(async () => (await import("..")).VectorDbProvider),
     options: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
 });
 
 export declare namespace AppModelsRequestVectorDb {
     interface Raw {
-        provider: string;
+        provider: serializers.VectorDbProvider.Raw;
         options: Record<string, unknown>;
     }
 }
