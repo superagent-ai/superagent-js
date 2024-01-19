@@ -5,11 +5,12 @@
 /**
  * An enumeration.
  */
-export type VectorDbProvider = "PINECONE" | "ASTRA_DB" | "WEAVIATE" | "QDRANT";
+export type VectorDbProvider = "PINECONE" | "ASTRA_DB" | "WEAVIATE" | "QDRANT" | "SUPABASE";
 
 export const VectorDbProvider = {
     Pinecone: "PINECONE",
     AstraDb: "ASTRA_DB",
     Weaviate: "WEAVIATE",
     Qdrant: "QDRANT",
+    Supabase: "SUPABASE",
 } as const;

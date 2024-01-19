@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const VectorDbProvider: core.serialization.Schema<
     serializers.VectorDbProvider.Raw,
     SuperAgent.VectorDbProvider
-> = core.serialization.enum_(["PINECONE", "ASTRA_DB", "WEAVIATE", "QDRANT"]);
+> = core.serialization.enum_(["PINECONE", "ASTRA_DB", "WEAVIATE", "QDRANT", "SUPABASE"]);
 
 export declare namespace VectorDbProvider {
-    type Raw = "PINECONE" | "ASTRA_DB" | "WEAVIATE" | "QDRANT";
+    type Raw = "PINECONE" | "ASTRA_DB" | "WEAVIATE" | "QDRANT" | "SUPABASE";
 }
