@@ -8,6 +8,7 @@ export * from "./DatasourceType";
 export * from "./HttpValidationError";
 export * from "./LlmList";
 export * from "./LlmModel";
+export * from "./LlmParams";
 export * from "./LlmProvider";
 export * from "./ToolList";
 export * from "./ToolType";

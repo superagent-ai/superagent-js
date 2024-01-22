@@ -14,6 +14,10 @@ export const AppModelsRequestAgentInvoke: core.serialization.Schema<
     sessionId: core.serialization.string().optional(),
     enableStreaming: core.serialization.boolean(),
     outputSchema: core.serialization.string().optional(),
+    llmParams: core.serialization.property(
+        "llm_params",
+        core.serialization.lazyObject(async () => (await import("../../../..")).LlmParams).optional()
+    ),
 });
 
 export declare namespace AppModelsRequestAgentInvoke {
@@ -22,5 +26,6 @@ export declare namespace AppModelsRequestAgentInvoke {
         sessionId?: string | null;
         enableStreaming: boolean;
         outputSchema?: string | null;
+        llm_params?: serializers.LlmParams.Raw | null;
     }
 }
