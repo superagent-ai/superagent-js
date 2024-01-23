@@ -22,11 +22,14 @@ export declare namespace Telemetry {
 }
 
 export class Telemetry {
-    constructor(protected readonly _options: Telemetry.Options) {}
+    constructor(protected readonly _options: Telemetry.Options = {}) {}
 
     /**
      * List runs
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.telemetry.listRuns({})
      */
     public async listRuns(
         request: SuperAgent.ListRunsApiV1RunsGetRequest = {},
@@ -48,7 +51,7 @@ export class Telemetry {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             queryParameters: _queryParams,

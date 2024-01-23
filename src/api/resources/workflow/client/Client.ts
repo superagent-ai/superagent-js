@@ -22,11 +22,14 @@ export declare namespace Workflow {
 }
 
 export class Workflow {
-    constructor(protected readonly _options: Workflow.Options) {}
+    constructor(protected readonly _options: Workflow.Options = {}) {}
 
     /**
      * List all workflows
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.workflow.list({})
      */
     public async list(
         request: SuperAgent.ListApiV1WorkflowsGetRequest = {},
@@ -52,7 +55,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -105,6 +108,12 @@ export class Workflow {
     /**
      * Create a new workflow
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.workflow.create({
+     *         name: "string",
+     *         description: "string"
+     *     })
      */
     public async create(
         request: SuperAgent.AppModelsRequestWorkflow,
@@ -120,7 +129,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestWorkflow.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -173,6 +182,9 @@ export class Workflow {
     /**
      * Get a single workflow
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.workflow.get("string")
      */
     public async get(
         workflowId: string,
@@ -188,7 +200,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -240,6 +252,9 @@ export class Workflow {
     /**
      * Delete a specific workflow
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.workflow.delete("string")
      */
     public async delete(workflowId: string, requestOptions?: Workflow.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -252,7 +267,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -299,6 +314,12 @@ export class Workflow {
     /**
      * Patch a workflow step
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.workflow.update("string", "string", {
+     *         order: 1,
+     *         agentId: "string"
+     *     })
      */
     public async update(
         workflowId: string,
@@ -316,7 +337,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestWorkflowStep.jsonOrThrow(request, {
@@ -371,6 +392,12 @@ export class Workflow {
     /**
      * Invoke a specific workflow
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.workflow.invoke("string", {
+     *         input: "string",
+     *         enableStreaming: true
+     *     })
      */
     public async invoke(
         workflowId: string,
@@ -387,7 +414,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.WorkflowInvoke.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -435,6 +462,9 @@ export class Workflow {
     /**
      * List all steps of a workflow
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.workflow.listSteps("string")
      */
     public async listSteps(
         workflowId: string,
@@ -450,7 +480,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -502,6 +532,12 @@ export class Workflow {
     /**
      * Create a new workflow step
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.workflow.addStep("string", {
+     *         order: 1,
+     *         agentId: "string"
+     *     })
      */
     public async addStep(
         workflowId: string,
@@ -518,7 +554,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestWorkflowStep.jsonOrThrow(request, {
@@ -573,6 +609,9 @@ export class Workflow {
     /**
      * Delete a specific workflow step
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.workflow.deleteStep("string", "string")
      */
     public async deleteStep(
         workflowId: string,
@@ -589,7 +628,7 @@ export class Workflow {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,

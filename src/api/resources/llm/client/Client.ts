@@ -22,10 +22,13 @@ export declare namespace Llm {
 }
 
 export class Llm {
-    constructor(protected readonly _options: Llm.Options) {}
+    constructor(protected readonly _options: Llm.Options = {}) {}
 
     /**
      * List all LLMs
+     *
+     * @example
+     *     await superAgent.llm.list()
      */
     public async list(requestOptions?: Llm.RequestOptions): Promise<SuperAgent.LlmList> {
         const _response = await core.fetcher({
@@ -38,7 +41,7 @@ export class Llm {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -78,6 +81,12 @@ export class Llm {
     /**
      * Create a new LLM
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.llm.create({
+     *         provider: "string",
+     *         apiKey: "string"
+     *     })
      */
     public async create(
         request: SuperAgent.AppModelsRequestLlm,
@@ -93,7 +102,7 @@ export class Llm {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestLlm.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -146,6 +155,9 @@ export class Llm {
     /**
      * Get a single LLM
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.llm.get("string")
      */
     public async get(llmId: string, requestOptions?: Llm.RequestOptions): Promise<SuperAgent.AppModelsResponseLlm> {
         const _response = await core.fetcher({
@@ -158,7 +170,7 @@ export class Llm {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -210,6 +222,12 @@ export class Llm {
     /**
      * Patch an LLM
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.llm.update("string", {
+     *         provider: "string",
+     *         apiKey: "string"
+     *     })
      */
     public async update(
         llmId: string,
@@ -226,7 +244,7 @@ export class Llm {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestLlm.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),

@@ -4,6 +4,17 @@
 
 import * as SuperAgent from "../../../..";
 
+/**
+ * @example
+ *     {
+ *         input: "string",
+ *         enableStreaming: true,
+ *         llmParams: {
+ *             maxTokens: 1,
+ *             temperature: 1.1
+ *         }
+ *     }
+ */
 export interface AppModelsRequestAgentInvoke {
     input: string;
     sessionId?: string;

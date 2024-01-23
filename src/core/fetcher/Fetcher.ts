@@ -1,4 +1,4 @@
-import axios, { AxiosAdapter, AxiosError, AxiosResponse } from "axios";
+import { default as FormData } from "form-data";
 import qs from "qs";
 import { APIResponse } from "./APIResponse";
 
@@ -15,9 +15,7 @@ export declare namespace Fetcher {
         timeoutMs?: number;
         maxRetries?: number;
         withCredentials?: boolean;
-        responseType?: "json" | "blob";
-        adapter?: AxiosAdapter;
-        onUploadProgress?: (event: ProgressEvent) => void;
+        responseType?: "json" | "blob" | "streaming";
     }
 
     export type Error = FailedStatusCodeError | NonJsonError | TimeoutError | UnknownError;
@@ -62,29 +60,39 @@ async function fetcherImpl<R = unknown>(args: Fetcher.Args): Promise<APIResponse
         }
     }
 
-    const makeRequest = async (): Promise<AxiosResponse> =>
-        await axios({
-            url: args.url,
-            params: args.queryParameters,
-            paramsSerializer: (params) => {
-                return qs.stringify(params, { arrayFormat: "repeat" });
-            },
+    const url =
+        Object.keys(args.queryParameters ?? {}).length > 0
+            ? `${args.url}?${qs.stringify(args.queryParameters, { arrayFormat: "repeat" })}`
+            : args.url;
+
+    let body: BodyInit | undefined = undefined;
+    if (args.body instanceof FormData) {
+        // @ts-expect-error
+        body = args.body;
+    } else {
+        body = JSON.stringify(args.body);
+    }
+
+    const fetchFn = typeof fetch == "function" ? fetch : require("node-fetch");
+
+    const makeRequest = async (): Promise<Response> => {
+        const controller = new AbortController();
+        let abortId = undefined;
+        if (args.timeoutMs != null) {
+            abortId = setTimeout(() => controller.abort(), args.timeoutMs);
+        }
+        const response = await fetchFn(url, {
             method: args.method,
             headers,
-            data: args.body,
-            validateStatus: () => true,
-            transformResponse: (response) => response,
-            timeout: args.timeoutMs,
-            transitional: {
-                clarifyTimeoutError: true,
-            },
-            withCredentials: args.withCredentials,
-            adapter: args.adapter,
-            onUploadProgress: args.onUploadProgress,
-            maxBodyLength: Infinity,
-            maxContentLength: Infinity,
-            responseType: args.responseType ?? "json",
+            body,
+            signal: controller.signal,
+            credentials: args.withCredentials ? "include" : undefined,
         });
+        if (abortId != null) {
+            clearTimeout(abortId);
+        }
+        return response;
+    };
 
     try {
         let response = await makeRequest();
@@ -97,27 +105,33 @@ async function fetcherImpl<R = unknown>(args: Fetcher.Args): Promise<APIResponse
                 response.status >= 500
             ) {
                 const delay = Math.min(INITIAL_RETRY_DELAY * Math.pow(i, 2), MAX_RETRY_DELAY);
-                response = await new Promise((resolve) => setTimeout(resolve, delay));
+                await new Promise((resolve) => setTimeout(resolve, delay));
+                response = await makeRequest();
             } else {
                 break;
             }
         }
 
         let body: unknown;
-        if (args.responseType === "blob") {
-            body = response.data;
-        } else if (response.data != null && response.data.length > 0) {
-            try {
-                body = JSON.parse(response.data) ?? undefined;
-            } catch {
-                return {
-                    ok: false,
-                    error: {
-                        reason: "non-json",
-                        statusCode: response.status,
-                        rawBody: response.data,
-                    },
-                };
+        if (response.body != null && args.responseType === "blob") {
+            body = await response.blob();
+        } else if (response.body != null && args.responseType === "streaming") {
+            body = response.body;
+        } else {
+            const text = await response.text();
+            if (text.length > 0) {
+                try {
+                    body = JSON.parse(text);
+                } catch (err) {
+                    return {
+                        ok: false,
+                        error: {
+                            reason: "non-json",
+                            statusCode: response.status,
+                            rawBody: text,
+                        },
+                    };
+                }
             }
         }
 
@@ -125,6 +139,7 @@ async function fetcherImpl<R = unknown>(args: Fetcher.Args): Promise<APIResponse
             return {
                 ok: true,
                 body: body as R,
+                headers: response.headers,
             };
         } else {
             return {
@@ -137,11 +152,19 @@ async function fetcherImpl<R = unknown>(args: Fetcher.Args): Promise<APIResponse
             };
         }
     } catch (error) {
-        if ((error as AxiosError).code === "ETIMEDOUT") {
+        if (error instanceof Error && error.name === "AbortError") {
             return {
                 ok: false,
                 error: {
                     reason: "timeout",
+                },
+            };
+        } else if (error instanceof Error) {
+            return {
+                ok: false,
+                error: {
+                    reason: "unknown",
+                    errorMessage: error.message,
                 },
             };
         }
@@ -150,7 +173,7 @@ async function fetcherImpl<R = unknown>(args: Fetcher.Args): Promise<APIResponse
             ok: false,
             error: {
                 reason: "unknown",
-                errorMessage: (error as AxiosError).message,
+                errorMessage: JSON.stringify(error),
             },
         };
     }

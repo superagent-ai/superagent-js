@@ -22,11 +22,16 @@ export declare namespace ApiUser {
 }
 
 export class ApiUser {
-    constructor(protected readonly _options: ApiUser.Options) {}
+    constructor(protected readonly _options: ApiUser.Options = {}) {}
 
     /**
      * Create a new API user
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.apiUser.create({
+     *         email: "string"
+     *     })
      */
     public async create(
         request: SuperAgent.AppModelsRequestApiUser,
@@ -42,7 +47,7 @@ export class ApiUser {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestApiUser.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -94,6 +99,9 @@ export class ApiUser {
 
     /**
      * Get a single api user
+     *
+     * @example
+     *     await superAgent.apiUser.get()
      */
     public async get(requestOptions?: ApiUser.RequestOptions): Promise<SuperAgent.AppModelsResponseApiUser> {
         const _response = await core.fetcher({
@@ -106,7 +114,7 @@ export class ApiUser {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -145,6 +153,9 @@ export class ApiUser {
 
     /**
      * Delete an api user
+     *
+     * @example
+     *     await superAgent.apiUser.delete()
      */
     public async delete(requestOptions?: ApiUser.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -157,7 +168,7 @@ export class ApiUser {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,

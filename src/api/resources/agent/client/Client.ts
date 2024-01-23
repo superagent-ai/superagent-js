@@ -22,11 +22,14 @@ export declare namespace Agent {
 }
 
 export class Agent {
-    constructor(protected readonly _options: Agent.Options) {}
+    constructor(protected readonly _options: Agent.Options = {}) {}
 
     /**
      * List all agents
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.list({})
      */
     public async list(
         request: SuperAgent.ListApiV1AgentsGetRequest = {},
@@ -52,7 +55,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -105,6 +108,13 @@ export class Agent {
     /**
      * Create a new agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.create({
+     *         name: "string",
+     *         llmModel: "string",
+     *         description: "string"
+     *     })
      */
     public async create(
         request: SuperAgent.AppModelsRequestAgent,
@@ -120,7 +130,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestAgent.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -173,6 +183,9 @@ export class Agent {
     /**
      * Get a single agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.get("string")
      */
     public async get(
         agentId: string,
@@ -188,7 +201,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -240,6 +253,9 @@ export class Agent {
     /**
      * Delete an agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.delete("string")
      */
     public async delete(agentId: string, requestOptions?: Agent.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -252,7 +268,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -299,6 +315,13 @@ export class Agent {
     /**
      * Patch an agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.update("string", {
+     *         name: "string",
+     *         llmModel: "string",
+     *         description: "string"
+     *     })
      */
     public async update(
         agentId: string,
@@ -315,7 +338,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestAgent.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -368,6 +391,16 @@ export class Agent {
     /**
      * Invoke an agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.invoke("string", {
+     *         input: "string",
+     *         enableStreaming: true,
+     *         llmParams: {
+     *             maxTokens: 1,
+     *             temperature: 1.1
+     *         }
+     *     })
      */
     public async invoke(
         agentId: string,
@@ -384,7 +417,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestAgentInvoke.jsonOrThrow(request, {
@@ -439,6 +472,11 @@ export class Agent {
     /**
      * Add LLM to agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.addLlm("string", {
+     *         llmId: "string"
+     *     })
      */
     public async addLlm(
         agentId: string,
@@ -455,7 +493,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestAgentLlm.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -508,6 +546,9 @@ export class Agent {
     /**
      * Remove LLM from agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.removeLlm("string", "string")
      */
     public async removeLlm(agentId: string, llmId: string, requestOptions?: Agent.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -520,7 +561,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -567,6 +608,9 @@ export class Agent {
     /**
      * List agent tools
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.listTools("string")
      */
     public async listTools(agentId: string, requestOptions?: Agent.RequestOptions): Promise<SuperAgent.AgentToolList> {
         const _response = await core.fetcher({
@@ -579,7 +623,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -631,6 +675,11 @@ export class Agent {
     /**
      * Add tool to agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.addTool("string", {
+     *         toolId: "string"
+     *     })
      */
     public async addTool(
         agentId: string,
@@ -647,7 +696,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestAgentTool.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -700,6 +749,9 @@ export class Agent {
     /**
      * Remove tool from agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.removeTool("string", "string")
      */
     public async removeTool(agentId: string, toolId: string, requestOptions?: Agent.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -712,7 +764,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -759,6 +811,9 @@ export class Agent {
     /**
      * List agent datasources
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.listDatasources("string")
      */
     public async listDatasources(
         agentId: string,
@@ -774,7 +829,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -826,6 +881,11 @@ export class Agent {
     /**
      * Add datasource to agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.addDatasource("string", {
+     *         datasourceId: "string"
+     *     })
      */
     public async addDatasource(
         agentId: string,
@@ -842,7 +902,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestAgentDatasource.jsonOrThrow(request, {
@@ -897,6 +957,9 @@ export class Agent {
     /**
      * Remove datasource from agent
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.agent.removeDatasource("string", "string")
      */
     public async removeDatasource(
         agentId: string,
@@ -913,7 +976,7 @@ export class Agent {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,

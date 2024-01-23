@@ -22,11 +22,14 @@ export declare namespace Datasource {
 }
 
 export class Datasource {
-    constructor(protected readonly _options: Datasource.Options) {}
+    constructor(protected readonly _options: Datasource.Options = {}) {}
 
     /**
      * List all datasources
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.datasource.list({})
      */
     public async list(
         request: SuperAgent.ListApiV1DatasourcesGetRequest = {},
@@ -52,7 +55,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -105,6 +108,13 @@ export class Datasource {
     /**
      * Create a new datasource
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.datasource.create({
+     *         name: "string",
+     *         description: "string",
+     *         type: "string"
+     *     })
      */
     public async create(
         request: SuperAgent.AppModelsRequestDatasource,
@@ -120,7 +130,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestDatasource.jsonOrThrow(request, {
@@ -175,6 +185,9 @@ export class Datasource {
     /**
      * Get a specific datasource
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.datasource.get("string")
      */
     public async get(
         datasourceId: string,
@@ -190,7 +203,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -242,6 +255,9 @@ export class Datasource {
     /**
      * Delete a specific datasource
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.datasource.delete("string")
      */
     public async delete(datasourceId: string, requestOptions?: Datasource.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -254,7 +270,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -301,6 +317,13 @@ export class Datasource {
     /**
      * Update a specific datasource
      * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.datasource.update("string", {
+     *         name: "string",
+     *         description: "string",
+     *         type: "string"
+     *     })
      */
     public async update(
         datasourceId: string,
@@ -317,7 +340,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.61",
+                "X-Fern-SDK-Version": "v0.1.62",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestDatasource.jsonOrThrow(request, {

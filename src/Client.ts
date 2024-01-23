@@ -26,7 +26,7 @@ export declare namespace SuperAgentClient {
 }
 
 export class SuperAgentClient {
-    constructor(protected readonly _options: SuperAgentClient.Options) {}
+    constructor(protected readonly _options: SuperAgentClient.Options = {}) {}
 
     protected _agent: Agent | undefined;
 
