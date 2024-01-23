@@ -48,7 +48,7 @@ export class Telemetry {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.59",
+                "X-Fern-SDK-Version": "v0.1.60",
             },
             contentType: "application/json",
             queryParameters: _queryParams,
