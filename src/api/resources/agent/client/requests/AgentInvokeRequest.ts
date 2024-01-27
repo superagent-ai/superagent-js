@@ -15,7 +15,7 @@ import * as SuperAgent from "../../../..";
  *         }
  *     }
  */
-export interface InvokeApiV1AgentsAgentIdInvokePostRequest {
+export interface AgentInvokeRequest {
     input: string;
     sessionId?: string;
     outputSchema?: string;

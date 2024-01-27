@@ -32,7 +32,7 @@ export class VectorDatabase {
      *     await superAgent.vectorDatabase.create({
      *         provider: SuperAgent.VectorDbProvider.Pinecone,
      *         options: {
-     *             "string": "string"
+     *             "string": {}
      *         }
      *     })
      */
@@ -50,7 +50,7 @@ export class VectorDatabase {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.64",
+                "X-Fern-SDK-Version": "v0.1.66",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestVectorDb.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -117,7 +117,7 @@ export class VectorDatabase {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.64",
+                "X-Fern-SDK-Version": "v0.1.66",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -175,7 +175,7 @@ export class VectorDatabase {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.64",
+                "X-Fern-SDK-Version": "v0.1.66",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -232,7 +232,7 @@ export class VectorDatabase {
      *     await superAgent.vectorDatabase.update("string", {
      *         provider: SuperAgent.VectorDbProvider.Pinecone,
      *         options: {
-     *             "string": "string"
+     *             "string": {}
      *         }
      *     })
      */
@@ -251,7 +251,7 @@ export class VectorDatabase {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.64",
+                "X-Fern-SDK-Version": "v0.1.66",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestVectorDb.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),

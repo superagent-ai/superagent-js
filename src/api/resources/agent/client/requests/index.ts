@@ -1,6 +1,6 @@
 export { ListApiV1AgentsGetRequest } from "./ListApiV1AgentsGetRequest";
-export { InvokeApiV1AgentsAgentIdInvokePostStreamRequest } from "./InvokeApiV1AgentsAgentIdInvokePostStreamRequest";
-export { InvokeApiV1AgentsAgentIdInvokePostRequest } from "./InvokeApiV1AgentsAgentIdInvokePostRequest";
+export { AgentInvokeStreamRequest } from "./AgentInvokeStreamRequest";
+export { AgentInvokeRequest } from "./AgentInvokeRequest";
 export { AppModelsRequestAgentLlm } from "./AppModelsRequestAgentLlm";
 export { AppModelsRequestAgentTool } from "./AppModelsRequestAgentTool";
 export { AppModelsRequestAgentDatasource } from "./AppModelsRequestAgentDatasource";

@@ -6,9 +6,9 @@ import * as serializers from "../../../..";
 import * as SuperAgent from "../../../../../api";
 import * as core from "../../../../../core";
 
-export const InvokeApiV1AgentsAgentIdInvokePostRequest: core.serialization.Schema<
-    serializers.InvokeApiV1AgentsAgentIdInvokePostRequest.Raw,
-    SuperAgent.InvokeApiV1AgentsAgentIdInvokePostRequest
+export const AgentInvokeStreamRequest: core.serialization.Schema<
+    serializers.AgentInvokeStreamRequest.Raw,
+    SuperAgent.AgentInvokeStreamRequest
 > = core.serialization.object({
     input: core.serialization.string(),
     sessionId: core.serialization.string().optional(),
@@ -19,7 +19,7 @@ export const InvokeApiV1AgentsAgentIdInvokePostRequest: core.serialization.Schem
     ),
 });
 
-export declare namespace InvokeApiV1AgentsAgentIdInvokePostRequest {
+export declare namespace AgentInvokeStreamRequest {
     interface Raw {
         input: string;
         sessionId?: string | null;

@@ -4,7 +4,7 @@
 
 import * as SuperAgent from "../../../..";
 
-export interface InvokeApiV1AgentsAgentIdInvokePostStreamRequest {
+export interface AgentInvokeStreamRequest {
     input: string;
     sessionId?: string;
     outputSchema?: string;
