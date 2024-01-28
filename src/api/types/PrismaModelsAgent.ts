@@ -17,7 +17,7 @@ export interface PrismaModelsAgent {
     createdAt: Date;
     updatedAt: Date;
     llms?: SuperAgent.PrismaModelsAgentLlm[];
-    llmModel: SuperAgent.LlmModel;
+    llmModel?: SuperAgent.LlmModel;
     prompt?: string;
     apiUserId: string;
     apiUser?: SuperAgent.PrismaModelsApiUser;

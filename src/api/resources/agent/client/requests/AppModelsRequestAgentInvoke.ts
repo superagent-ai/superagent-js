@@ -8,16 +8,17 @@ import * as SuperAgent from "../../../..";
  * @example
  *     {
  *         input: "string",
- *         enableStreaming: false,
+ *         enableStreaming: true,
  *         llmParams: {
  *             maxTokens: 1,
  *             temperature: 1.1
  *         }
  *     }
  */
-export interface AgentInvokeRequest {
+export interface AppModelsRequestAgentInvoke {
     input: string;
     sessionId?: string;
+    enableStreaming: boolean;
     outputSchema?: string;
     llmParams?: SuperAgent.LlmParams;
 }

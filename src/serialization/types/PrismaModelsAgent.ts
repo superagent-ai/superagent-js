@@ -21,7 +21,7 @@ export const PrismaModelsAgent: core.serialization.ObjectSchema<
     llms: core.serialization
         .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsAgentLlm))
         .optional(),
-    llmModel: core.serialization.lazy(async () => (await import("..")).LlmModel),
+    llmModel: core.serialization.lazy(async () => (await import("..")).LlmModel).optional(),
     prompt: core.serialization.string().optional(),
     apiUserId: core.serialization.string(),
     apiUser: core.serialization.lazyObject(async () => (await import("..")).PrismaModelsApiUser).optional(),
@@ -47,7 +47,7 @@ export declare namespace PrismaModelsAgent {
         createdAt: string;
         updatedAt: string;
         llms?: serializers.PrismaModelsAgentLlm.Raw[] | null;
-        llmModel: serializers.LlmModel.Raw;
+        llmModel?: serializers.LlmModel.Raw | null;
         prompt?: string | null;
         apiUserId: string;
         apiUser?: serializers.PrismaModelsApiUser.Raw | null;

@@ -14,7 +14,8 @@ export const AppModelsRequestAgent: core.serialization.ObjectSchema<
     name: core.serialization.string(),
     initialMessage: core.serialization.string().optional(),
     prompt: core.serialization.string().optional(),
-    llmModel: core.serialization.string(),
+    llmModel: core.serialization.string().optional(),
+    llmProvider: core.serialization.lazy(async () => (await import("..")).LlmProvider).optional(),
     description: core.serialization.string(),
     avatar: core.serialization.string().optional(),
 });
@@ -25,7 +26,8 @@ export declare namespace AppModelsRequestAgent {
         name: string;
         initialMessage?: string | null;
         prompt?: string | null;
-        llmModel: string;
+        llmModel?: string | null;
+        llmProvider?: serializers.LlmProvider.Raw | null;
         description: string;
         avatar?: string | null;
     }

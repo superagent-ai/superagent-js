@@ -1,5 +1,4 @@
-export { AgentInvokeStreamRequest } from "./AgentInvokeStreamRequest";
-export { AgentInvokeRequest } from "./AgentInvokeRequest";
+export { AppModelsRequestAgentInvoke } from "./AppModelsRequestAgentInvoke";
 export { AppModelsRequestAgentLlm } from "./AppModelsRequestAgentLlm";
 export { AppModelsRequestAgentTool } from "./AppModelsRequestAgentTool";
 export { AppModelsRequestAgentDatasource } from "./AppModelsRequestAgentDatasource";
