@@ -23,7 +23,7 @@ export const PrismaModelsTool: core.serialization.ObjectSchema<
     tools: core.serialization
         .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsAgentTool))
         .optional(),
-    toolConfig: core.serialization.string().optional(),
+    toolConfig: core.serialization.unknown().optional(),
 });
 
 export declare namespace PrismaModelsTool {
@@ -39,6 +39,6 @@ export declare namespace PrismaModelsTool {
         apiUserId: string;
         apiUser?: serializers.PrismaModelsApiUser.Raw | null;
         tools?: serializers.PrismaModelsAgentTool.Raw[] | null;
-        toolConfig?: string | null;
+        toolConfig?: unknown | null;
     }
 }

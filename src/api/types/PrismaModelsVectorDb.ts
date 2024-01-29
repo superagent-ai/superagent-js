@@ -10,7 +10,7 @@ import * as SuperAgent from "..";
 export interface PrismaModelsVectorDb {
     id: string;
     provider: SuperAgent.VectorDbProvider;
-    options?: string;
+    options?: unknown;
     datasources?: SuperAgent.PrismaModelsDatasource[];
     createdAt: Date;
     updatedAt: Date;

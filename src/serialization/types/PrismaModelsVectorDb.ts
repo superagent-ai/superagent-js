@@ -12,7 +12,7 @@ export const PrismaModelsVectorDb: core.serialization.ObjectSchema<
 > = core.serialization.object({
     id: core.serialization.string(),
     provider: core.serialization.lazy(async () => (await import("..")).VectorDbProvider),
-    options: core.serialization.string().optional(),
+    options: core.serialization.unknown().optional(),
     datasources: core.serialization
         .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsDatasource))
         .optional(),
@@ -26,7 +26,7 @@ export declare namespace PrismaModelsVectorDb {
     interface Raw {
         id: string;
         provider: serializers.VectorDbProvider.Raw;
-        options?: string | null;
+        options?: unknown | null;
         datasources?: serializers.PrismaModelsDatasource.Raw[] | null;
         createdAt: string;
         updatedAt: string;

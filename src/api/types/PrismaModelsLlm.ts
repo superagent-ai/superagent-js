@@ -11,7 +11,7 @@ export interface PrismaModelsLlm {
     id: string;
     provider: SuperAgent.LlmProvider;
     apiKey: string;
-    options?: string;
+    options?: unknown;
     agents?: SuperAgent.PrismaModelsAgentLlm[];
     createdAt: Date;
     updatedAt: Date;
