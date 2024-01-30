@@ -16,4 +16,5 @@ export interface PrismaModelsWorkflow {
     steps?: SuperAgent.PrismaModelsWorkflowStep[];
     apiUserId: string;
     apiUser?: SuperAgent.PrismaModelsApiUser;
+    workflowConfigs?: SuperAgent.WorkflowConfig[];
 }

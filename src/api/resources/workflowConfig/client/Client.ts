@@ -6,10 +6,10 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as SuperAgent from "../../..";
 import urlJoin from "url-join";
-import * as serializers from "../../../../serialization";
 import * as errors from "../../../../errors";
+import * as serializers from "../../../../serialization";
 
-export declare namespace Telemetry {
+export declare namespace WorkflowConfig {
     interface Options {
         environment?: core.Supplier<environments.SuperAgentEnvironment | string>;
         token?: core.Supplier<core.BearerToken | undefined>;
@@ -21,32 +21,22 @@ export declare namespace Telemetry {
     }
 }
 
-export class Telemetry {
-    constructor(protected readonly _options: Telemetry.Options = {}) {}
+export class WorkflowConfig {
+    constructor(protected readonly _options: WorkflowConfig.Options = {}) {}
 
     /**
-     * List runs
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.telemetry.listRuns({})
+     *     await superAgent.workflowConfig.parseYaml("string")
      */
-    public async listRuns(
-        request: SuperAgent.ListRunsApiV1RunsGetRequest = {},
-        requestOptions?: Telemetry.RequestOptions
-    ): Promise<SuperAgent.AgentRunList> {
-        const { agentId } = request;
-        const _queryParams: Record<string, string | string[]> = {};
-        if (agentId != null) {
-            _queryParams["agent_id"] = agentId;
-        }
-
+    public async parseYaml(workflowId: string, requestOptions?: WorkflowConfig.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
-                "api/v1/runs"
+                `api/v1/workflows/${workflowId}/config`
             ),
-            method: "GET",
+            method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
@@ -54,17 +44,11 @@ export class Telemetry {
                 "X-Fern-SDK-Version": "v0.1.69",
             },
             contentType: "application/json",
-            queryParameters: _queryParams,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
         });
         if (_response.ok) {
-            return await serializers.AgentRunList.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return _response.body;
         }
 
         if (_response.error.reason === "status-code") {

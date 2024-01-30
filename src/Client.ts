@@ -10,6 +10,7 @@ import { ApiUser } from "./api/resources/apiUser/client/Client";
 import { Datasource } from "./api/resources/datasource/client/Client";
 import { Tool } from "./api/resources/tool/client/Client";
 import { Workflow } from "./api/resources/workflow/client/Client";
+import { WorkflowConfig } from "./api/resources/workflowConfig/client/Client";
 import { VectorDatabase } from "./api/resources/vectorDatabase/client/Client";
 import { Telemetry } from "./api/resources/telemetry/client/Client";
 
@@ -62,6 +63,12 @@ export class SuperAgentClient {
 
     public get workflow(): Workflow {
         return (this._workflow ??= new Workflow(this._options));
+    }
+
+    protected _workflowConfig: WorkflowConfig | undefined;
+
+    public get workflowConfig(): WorkflowConfig {
+        return (this._workflowConfig ??= new WorkflowConfig(this._options));
     }
 
     protected _vectorDatabase: VectorDatabase | undefined;

@@ -19,4 +19,5 @@ export interface PrismaModelsApiUser {
     tools?: SuperAgent.PrismaModelsTool[];
     workflows?: SuperAgent.PrismaModelsWorkflow[];
     vectorDb?: SuperAgent.PrismaModelsVectorDb[];
+    workflowConfigs?: SuperAgent.WorkflowConfig[];
 }

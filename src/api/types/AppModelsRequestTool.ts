@@ -4,8 +4,8 @@
 
 export interface AppModelsRequestTool {
     name: string;
-    description: string;
+    description?: string;
     type: string;
     metadata?: Record<string, unknown>;
-    returnDirect: boolean;
+    returnDirect?: boolean;
 }

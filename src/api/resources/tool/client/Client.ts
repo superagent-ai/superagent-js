@@ -55,7 +55,7 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.68",
+                "X-Fern-SDK-Version": "v0.1.69",
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -112,9 +112,7 @@ export class Tool {
      * @example
      *     await superAgent.tool.create({
      *         name: "string",
-     *         description: "string",
-     *         type: "string",
-     *         returnDirect: true
+     *         type: "string"
      *     })
      */
     public async create(
@@ -131,7 +129,7 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.68",
+                "X-Fern-SDK-Version": "v0.1.69",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestTool.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -199,7 +197,7 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.68",
+                "X-Fern-SDK-Version": "v0.1.69",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -266,7 +264,7 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.68",
+                "X-Fern-SDK-Version": "v0.1.69",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -317,9 +315,7 @@ export class Tool {
      * @example
      *     await superAgent.tool.update("string", {
      *         name: "string",
-     *         description: "string",
-     *         type: "string",
-     *         returnDirect: true
+     *         type: "string"
      *     })
      */
     public async update(
@@ -337,7 +333,7 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.1.68",
+                "X-Fern-SDK-Version": "v0.1.69",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestTool.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),

@@ -11,18 +11,18 @@ export const AppModelsRequestTool: core.serialization.ObjectSchema<
     SuperAgent.AppModelsRequestTool
 > = core.serialization.object({
     name: core.serialization.string(),
-    description: core.serialization.string(),
+    description: core.serialization.string().optional(),
     type: core.serialization.string(),
     metadata: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
-    returnDirect: core.serialization.boolean(),
+    returnDirect: core.serialization.boolean().optional(),
 });
 
 export declare namespace AppModelsRequestTool {
     interface Raw {
         name: string;
-        description: string;
+        description?: string | null;
         type: string;
         metadata?: Record<string, unknown> | null;
-        returnDirect: boolean;
+        returnDirect?: boolean | null;
     }
 }
