@@ -11,6 +11,7 @@ export const PrismaModelsAgent: core.serialization.ObjectSchema<
     SuperAgent.PrismaModelsAgent
 > = core.serialization.object({
     id: core.serialization.string(),
+    type: core.serialization.lazy(async () => (await import("..")).AgentType),
     name: core.serialization.string(),
     avatar: core.serialization.string().optional(),
     initialMessage: core.serialization.string().optional(),
@@ -39,6 +40,7 @@ export const PrismaModelsAgent: core.serialization.ObjectSchema<
 export declare namespace PrismaModelsAgent {
     interface Raw {
         id: string;
+        type: serializers.AgentType.Raw;
         name: string;
         avatar?: string | null;
         initialMessage?: string | null;

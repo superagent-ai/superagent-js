@@ -9,6 +9,7 @@ import * as SuperAgent from "..";
  */
 export interface PrismaModelsAgent {
     id: string;
+    type: SuperAgent.AgentType;
     name: string;
     avatar?: string;
     initialMessage?: string;
