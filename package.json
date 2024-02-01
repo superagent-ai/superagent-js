@@ -1,6 +1,6 @@
 {
     "name": "superagentai-js",
-    "version": "v0.1.70",
+    "version": "v0.1.71",
     "private": false,
     "repository": "https://github.com/homanp/superagent-js",
     "main": "./index.js",

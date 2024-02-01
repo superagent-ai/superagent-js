@@ -14,6 +14,7 @@ export const LlmModel: core.serialization.Schema<serializers.LlmModel.Raw, Super
         "GPT_4_0613",
         "GPT_4_32K_0613",
         "GPT_4_1106_PREVIEW",
+        "GPT_4_TURBO_PREVIEW",
         "MISTRAL_7B_INSTRUCT_V01",
         "MIXTRAL_8X7B_INSTRUCT_V01",
     ]);
@@ -26,6 +27,7 @@ export declare namespace LlmModel {
         | "GPT_4_0613"
         | "GPT_4_32K_0613"
         | "GPT_4_1106_PREVIEW"
+        | "GPT_4_TURBO_PREVIEW"
         | "MISTRAL_7B_INSTRUCT_V01"
         | "MIXTRAL_8X7B_INSTRUCT_V01";
 }
