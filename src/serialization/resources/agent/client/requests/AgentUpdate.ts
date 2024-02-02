@@ -15,6 +15,8 @@ export const AgentUpdate: core.serialization.Schema<serializers.AgentUpdate.Raw,
         llmModel: core.serialization.string().optional(),
         description: core.serialization.string().optional(),
         avatar: core.serialization.string().optional(),
+        type: core.serialization.string().optional(),
+        openaiOptions: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     });
 
 export declare namespace AgentUpdate {
@@ -26,5 +28,7 @@ export declare namespace AgentUpdate {
         llmModel?: string | null;
         description?: string | null;
         avatar?: string | null;
+        type?: string | null;
+        openaiOptions?: Record<string, unknown> | null;
     }
 }

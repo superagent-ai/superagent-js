@@ -14,10 +14,12 @@ import * as SuperAgent from "../../../..";
 export interface AppModelsRequestAgent {
     isActive?: boolean;
     name: string;
+    type?: string;
     initialMessage?: string;
     prompt?: string;
     llmModel?: string;
     llmProvider?: SuperAgent.LlmProvider;
     description?: string;
     avatar?: string;
+    openaiOptions?: Record<string, unknown>;
 }

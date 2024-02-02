@@ -25,4 +25,5 @@ export interface PrismaModelsAgent {
     datasources?: SuperAgent.PrismaModelsAgentDatasource[];
     tools?: SuperAgent.PrismaModelsAgentTool[];
     workflowSteps?: SuperAgent.PrismaModelsWorkflowStep[];
+    openaiMetadata?: unknown;
 }

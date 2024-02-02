@@ -14,4 +14,6 @@ export interface AgentUpdate {
     llmModel?: string;
     description?: string;
     avatar?: string;
+    type?: string;
+    openaiOptions?: Record<string, unknown>;
 }
