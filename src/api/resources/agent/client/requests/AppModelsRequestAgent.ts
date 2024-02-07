@@ -21,5 +21,5 @@ export interface AppModelsRequestAgent {
     llmProvider?: SuperAgent.LlmProvider;
     description?: string;
     avatar?: string;
-    openaiOptions?: Record<string, unknown>;
+    metadata?: Record<string, unknown>;
 }

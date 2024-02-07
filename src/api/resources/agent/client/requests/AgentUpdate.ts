@@ -15,5 +15,5 @@ export interface AgentUpdate {
     description?: string;
     avatar?: string;
     type?: string;
-    openaiOptions?: Record<string, unknown>;
+    metadata?: Record<string, unknown>;
 }

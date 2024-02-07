@@ -19,7 +19,7 @@ export const AppModelsRequestAgent: core.serialization.Schema<
     llmProvider: core.serialization.lazy(async () => (await import("../../../..")).LlmProvider).optional(),
     description: core.serialization.string().optional(),
     avatar: core.serialization.string().optional(),
-    openaiOptions: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+    metadata: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
 });
 
 export declare namespace AppModelsRequestAgent {
@@ -33,6 +33,6 @@ export declare namespace AppModelsRequestAgent {
         llmProvider?: serializers.LlmProvider.Raw | null;
         description?: string | null;
         avatar?: string | null;
-        openaiOptions?: Record<string, unknown> | null;
+        metadata?: Record<string, unknown> | null;
     }
 }
