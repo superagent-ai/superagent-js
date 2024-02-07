@@ -8,18 +8,20 @@ import * as SuperAgent from "../../../..";
  * @example
  *     {
  *         name: "string",
- *         llmProvider: SuperAgent.LlmProvider.Openai
+ *         llmProvider: SuperAgent.LlmProvider.Openai,
+ *         type: SuperAgent.AgentType.Superagent,
+ *         parameters: {}
  *     }
  */
 export interface AppModelsRequestAgent {
     isActive?: boolean;
     name: string;
-    type?: string;
     initialMessage?: string;
     prompt?: string;
     llmModel?: string;
     llmProvider?: SuperAgent.LlmProvider;
     description?: string;
     avatar?: string;
-    metadata?: Record<string, unknown>;
+    type?: SuperAgent.AgentType;
+    parameters?: SuperAgent.OpenAiAssistantParameters;
 }

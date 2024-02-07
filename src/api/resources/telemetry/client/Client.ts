@@ -35,10 +35,26 @@ export class Telemetry {
         request: SuperAgent.ListRunsApiV1RunsGetRequest = {},
         requestOptions?: Telemetry.RequestOptions
     ): Promise<SuperAgent.AgentRunList> {
-        const { agentId } = request;
+        const { agentId, fromPage, toPage, limit, workflowId } = request;
         const _queryParams: Record<string, string | string[]> = {};
         if (agentId != null) {
             _queryParams["agent_id"] = agentId;
+        }
+
+        if (fromPage != null) {
+            _queryParams["from_page"] = fromPage.toString();
+        }
+
+        if (toPage != null) {
+            _queryParams["to_page"] = toPage.toString();
+        }
+
+        if (limit != null) {
+            _queryParams["limit"] = limit.toString();
+        }
+
+        if (workflowId != null) {
+            _queryParams["workflow_id"] = workflowId;
         }
 
         const _response = await core.fetcher({
@@ -51,7 +67,7 @@ export class Telemetry {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
             },
             contentType: "application/json",
             queryParameters: _queryParams,

@@ -28,9 +28,9 @@ export class WorkflowConfig {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.workflowConfig.parseYaml("string")
+     *     await superAgent.workflowConfig.addConfig("string")
      */
-    public async parseYaml(workflowId: string, requestOptions?: WorkflowConfig.RequestOptions): Promise<unknown> {
+    public async addConfig(workflowId: string, requestOptions?: WorkflowConfig.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
@@ -41,7 +41,7 @@ export class WorkflowConfig {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,

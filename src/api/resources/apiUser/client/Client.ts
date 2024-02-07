@@ -47,7 +47,7 @@ export class ApiUser {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestApiUser.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
@@ -114,7 +114,7 @@ export class ApiUser {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -168,7 +168,7 @@ export class ApiUser {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.0",
+                "X-Fern-SDK-Version": "v0.2.1",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -183,6 +183,74 @@ export class ApiUser {
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
             });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.SuperAgentError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.SuperAgentTimeoutError();
+            case "unknown":
+                throw new errors.SuperAgentError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Indentify an api user
+     * @throws {@link SuperAgent.UnprocessableEntityError}
+     *
+     * @example
+     *     await superAgent.apiUser.indentify({
+     *         email: "string"
+     *     })
+     */
+    public async indentify(
+        request: SuperAgent.AppModelsRequestApiUser,
+        requestOptions?: ApiUser.RequestOptions
+    ): Promise<unknown> {
+        const _response = await core.fetcher({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.SuperAgentEnvironment.Default,
+                "api/v1/api-users/identify"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "superagentai-js",
+                "X-Fern-SDK-Version": "v0.2.1",
+            },
+            contentType: "application/json",
+            body: await serializers.AppModelsRequestApiUser.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new SuperAgent.UnprocessableEntityError(
+                        await serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.SuperAgentError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
         }
 
         switch (_response.error.reason) {

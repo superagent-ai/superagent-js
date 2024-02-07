@@ -8,4 +8,8 @@
  */
 export interface ListRunsApiV1RunsGetRequest {
     agentId?: string;
+    fromPage?: number;
+    toPage?: number;
+    limit?: number;
+    workflowId?: string;
 }

@@ -12,27 +12,29 @@ export const AppModelsRequestAgent: core.serialization.Schema<
 > = core.serialization.object({
     isActive: core.serialization.boolean().optional(),
     name: core.serialization.string(),
-    type: core.serialization.string().optional(),
     initialMessage: core.serialization.string().optional(),
     prompt: core.serialization.string().optional(),
     llmModel: core.serialization.string().optional(),
     llmProvider: core.serialization.lazy(async () => (await import("../../../..")).LlmProvider).optional(),
     description: core.serialization.string().optional(),
     avatar: core.serialization.string().optional(),
-    metadata: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+    type: core.serialization.lazy(async () => (await import("../../../..")).AgentType).optional(),
+    parameters: core.serialization
+        .lazyObject(async () => (await import("../../../..")).OpenAiAssistantParameters)
+        .optional(),
 });
 
 export declare namespace AppModelsRequestAgent {
     interface Raw {
         isActive?: boolean | null;
         name: string;
-        type?: string | null;
         initialMessage?: string | null;
         prompt?: string | null;
         llmModel?: string | null;
         llmProvider?: serializers.LlmProvider.Raw | null;
         description?: string | null;
         avatar?: string | null;
-        metadata?: Record<string, unknown> | null;
+        type?: serializers.AgentType.Raw | null;
+        parameters?: serializers.OpenAiAssistantParameters.Raw | null;
     }
 }
