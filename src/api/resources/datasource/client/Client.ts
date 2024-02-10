@@ -55,7 +55,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.1",
+                "X-Fern-SDK-Version": "v0.2.2",
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -112,7 +112,6 @@ export class Datasource {
      * @example
      *     await superAgent.datasource.create({
      *         name: "string",
-     *         description: "string",
      *         type: "string"
      *     })
      */
@@ -130,7 +129,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.1",
+                "X-Fern-SDK-Version": "v0.2.2",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestDatasource.jsonOrThrow(request, {
@@ -203,7 +202,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.1",
+                "X-Fern-SDK-Version": "v0.2.2",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -270,7 +269,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.1",
+                "X-Fern-SDK-Version": "v0.2.2",
             },
             contentType: "application/json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -321,7 +320,6 @@ export class Datasource {
      * @example
      *     await superAgent.datasource.update("string", {
      *         name: "string",
-     *         description: "string",
      *         type: "string"
      *     })
      */
@@ -340,7 +338,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.1",
+                "X-Fern-SDK-Version": "v0.2.2",
             },
             contentType: "application/json",
             body: await serializers.AppModelsRequestDatasource.jsonOrThrow(request, {

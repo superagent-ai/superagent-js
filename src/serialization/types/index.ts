@@ -29,7 +29,6 @@ export * from "./WorkflowStepList";
 export * from "./AppModelsRequestApiUser";
 export * from "./AppModelsRequestDatasource";
 export * from "./AppModelsRequestLlm";
-export * from "./AppModelsRequestTool";
 export * from "./AppModelsRequestVectorDb";
 export * from "./AppModelsRequestWorkflow";
 export * from "./AppModelsRequestWorkflowStep";

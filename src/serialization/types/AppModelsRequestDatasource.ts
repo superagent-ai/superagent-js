@@ -11,7 +11,7 @@ export const AppModelsRequestDatasource: core.serialization.ObjectSchema<
     SuperAgent.AppModelsRequestDatasource
 > = core.serialization.object({
     name: core.serialization.string(),
-    description: core.serialization.string(),
+    description: core.serialization.string().optional(),
     type: core.serialization.string(),
     content: core.serialization.string().optional(),
     url: core.serialization.string().optional(),
@@ -22,7 +22,7 @@ export const AppModelsRequestDatasource: core.serialization.ObjectSchema<
 export declare namespace AppModelsRequestDatasource {
     interface Raw {
         name: string;
-        description: string;
+        description?: string | null;
         type: string;
         content?: string | null;
         url?: string | null;
