@@ -13,7 +13,7 @@ export interface PrismaModelsTool {
     description: string;
     type: SuperAgent.ToolType;
     returnDirect: boolean;
-    metadata: string;
+    metadata?: string;
     createdAt: Date;
     updatedAt: Date;
     apiUserId: string;

@@ -15,7 +15,7 @@ export const PrismaModelsTool: core.serialization.ObjectSchema<
     description: core.serialization.string(),
     type: core.serialization.lazy(async () => (await import("..")).ToolType),
     returnDirect: core.serialization.boolean(),
-    metadata: core.serialization.string(),
+    metadata: core.serialization.string().optional(),
     createdAt: core.serialization.date(),
     updatedAt: core.serialization.date(),
     apiUserId: core.serialization.string(),
@@ -33,7 +33,7 @@ export declare namespace PrismaModelsTool {
         description: string;
         type: serializers.ToolType.Raw;
         returnDirect: boolean;
-        metadata: string;
+        metadata?: string | null;
         createdAt: string;
         updatedAt: string;
         apiUserId: string;
