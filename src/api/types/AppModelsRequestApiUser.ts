@@ -7,4 +7,5 @@ export interface AppModelsRequestApiUser {
     firstName?: string;
     lastName?: string;
     company?: string;
+    anonymousId?: string;
 }

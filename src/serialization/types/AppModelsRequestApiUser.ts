@@ -14,6 +14,7 @@ export const AppModelsRequestApiUser: core.serialization.ObjectSchema<
     firstName: core.serialization.string().optional(),
     lastName: core.serialization.string().optional(),
     company: core.serialization.string().optional(),
+    anonymousId: core.serialization.string().optional(),
 });
 
 export declare namespace AppModelsRequestApiUser {
@@ -22,5 +23,6 @@ export declare namespace AppModelsRequestApiUser {
         firstName?: string | null;
         lastName?: string | null;
         company?: string | null;
+        anonymousId?: string | null;
     }
 }
