@@ -5,9 +5,10 @@
 /**
  * An enumeration.
  */
-export type AgentType = "SUPERAGENT" | "OPENAI_ASSISTANT";
+export type AgentType = "SUPERAGENT" | "OPENAI_ASSISTANT" | "LLM";
 
 export const AgentType = {
     Superagent: "SUPERAGENT",
     OpenaiAssistant: "OPENAI_ASSISTANT",
+    Llm: "LLM",
 } as const;

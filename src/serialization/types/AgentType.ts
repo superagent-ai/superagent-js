@@ -7,8 +7,8 @@ import * as SuperAgent from "../../api";
 import * as core from "../../core";
 
 export const AgentType: core.serialization.Schema<serializers.AgentType.Raw, SuperAgent.AgentType> =
-    core.serialization.enum_(["SUPERAGENT", "OPENAI_ASSISTANT"]);
+    core.serialization.enum_(["SUPERAGENT", "OPENAI_ASSISTANT", "LLM"]);
 
 export declare namespace AgentType {
-    type Raw = "SUPERAGENT" | "OPENAI_ASSISTANT";
+    type Raw = "SUPERAGENT" | "OPENAI_ASSISTANT" | "LLM";
 }

@@ -5,10 +5,12 @@
 /**
  * An enumeration.
  */
-export type LlmProvider = "OPENAI" | "AZURE_OPENAI" | "HUGGINGFACE";
+export type LlmProvider = "OPENAI" | "AZURE_OPENAI" | "HUGGINGFACE" | "PERPLEXITY" | "TOGETHER_AI";
 
 export const LlmProvider = {
     Openai: "OPENAI",
     AzureOpenai: "AZURE_OPENAI",
     Huggingface: "HUGGINGFACE",
+    Perplexity: "PERPLEXITY",
+    TogetherAi: "TOGETHER_AI",
 } as const;

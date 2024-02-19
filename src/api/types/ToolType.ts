@@ -23,7 +23,8 @@ export type ToolType =
     | "TTS_1"
     | "HAND_OFF"
     | "FUNCTION"
-    | "HTTP";
+    | "HTTP"
+    | "SUPERRAG";
 
 export const ToolType = {
     Algolia: "ALGOLIA",
@@ -44,4 +45,5 @@ export const ToolType = {
     HandOff: "HAND_OFF",
     Function: "FUNCTION",
     Http: "HTTP",
+    Superrag: "SUPERRAG",
 } as const;

@@ -12,7 +12,6 @@ import { Tool } from "./api/resources/tool/client/Client";
 import { Workflow } from "./api/resources/workflow/client/Client";
 import { WorkflowConfig } from "./api/resources/workflowConfig/client/Client";
 import { VectorDatabase } from "./api/resources/vectorDatabase/client/Client";
-import { Telemetry } from "./api/resources/telemetry/client/Client";
 
 export declare namespace SuperAgentClient {
     interface Options {
@@ -75,11 +74,5 @@ export class SuperAgentClient {
 
     public get vectorDatabase(): VectorDatabase {
         return (this._vectorDatabase ??= new VectorDatabase(this._options));
-    }
-
-    protected _telemetry: Telemetry | undefined;
-
-    public get telemetry(): Telemetry {
-        return (this._telemetry ??= new Telemetry(this._options));
     }
 }

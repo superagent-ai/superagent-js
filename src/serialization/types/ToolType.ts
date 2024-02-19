@@ -26,6 +26,7 @@ export const ToolType: core.serialization.Schema<serializers.ToolType.Raw, Super
         "HAND_OFF",
         "FUNCTION",
         "HTTP",
+        "SUPERRAG",
     ]);
 
 export declare namespace ToolType {
@@ -47,5 +48,6 @@ export declare namespace ToolType {
         | "TTS_1"
         | "HAND_OFF"
         | "FUNCTION"
-        | "HTTP";
+        | "HTTP"
+        | "SUPERRAG";
 }
