@@ -1,6 +1,7 @@
 export * as agent from "./agent";
 export * as llm from "./llm";
 export * as apiUser from "./apiUser";
+export * as apiKey from "./apiKey";
 export * as datasource from "./datasource";
 export * as tool from "./tool";
 export * as workflow from "./workflow";

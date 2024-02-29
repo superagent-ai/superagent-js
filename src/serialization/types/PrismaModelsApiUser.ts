@@ -36,6 +36,9 @@ export const PrismaModelsApiUser: core.serialization.ObjectSchema<
     workflowConfigs: core.serialization
         .list(core.serialization.lazyObject(async () => (await import("..")).WorkflowConfig))
         .optional(),
+    apiKeys: core.serialization
+        .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsApiKey))
+        .optional(),
 });
 
 export declare namespace PrismaModelsApiUser {
@@ -52,5 +55,6 @@ export declare namespace PrismaModelsApiUser {
         workflows?: serializers.PrismaModelsWorkflow.Raw[] | null;
         vectorDb?: serializers.PrismaModelsVectorDb.Raw[] | null;
         workflowConfigs?: serializers.WorkflowConfig.Raw[] | null;
+        apiKeys?: serializers.PrismaModelsApiKey.Raw[] | null;
     }
 }

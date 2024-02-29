@@ -7,6 +7,7 @@ import * as core from "./core";
 import { Agent } from "./api/resources/agent/client/Client";
 import { Llm } from "./api/resources/llm/client/Client";
 import { ApiUser } from "./api/resources/apiUser/client/Client";
+import { ApiKey } from "./api/resources/apiKey/client/Client";
 import { Datasource } from "./api/resources/datasource/client/Client";
 import { Tool } from "./api/resources/tool/client/Client";
 import { Workflow } from "./api/resources/workflow/client/Client";
@@ -44,6 +45,12 @@ export class SuperAgentClient {
 
     public get apiUser(): ApiUser {
         return (this._apiUser ??= new ApiUser(this._options));
+    }
+
+    protected _apiKey: ApiKey | undefined;
+
+    public get apiKey(): ApiKey {
+        return (this._apiKey ??= new ApiKey(this._options));
     }
 
     protected _datasource: Datasource | undefined;
