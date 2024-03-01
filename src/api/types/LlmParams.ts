@@ -3,6 +3,6 @@
  */
 
 export interface LlmParams {
-    maxTokens: number;
-    temperature: number;
+    maxTokens?: number;
+    temperature?: number;
 }

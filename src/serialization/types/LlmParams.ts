@@ -8,13 +8,13 @@ import * as core from "../../core";
 
 export const LlmParams: core.serialization.ObjectSchema<serializers.LlmParams.Raw, SuperAgent.LlmParams> =
     core.serialization.object({
-        maxTokens: core.serialization.property("max_tokens", core.serialization.number()),
-        temperature: core.serialization.number(),
+        maxTokens: core.serialization.property("max_tokens", core.serialization.number().optional()),
+        temperature: core.serialization.number().optional(),
     });
 
 export declare namespace LlmParams {
     interface Raw {
-        max_tokens: number;
-        temperature: number;
+        max_tokens?: number | null;
+        temperature?: number | null;
     }
 }

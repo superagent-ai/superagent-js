@@ -9,10 +9,7 @@ import * as SuperAgent from "../../../..";
  *     {
  *         input: "string",
  *         enableStreaming: true,
- *         llmParams: {
- *             maxTokens: 1,
- *             temperature: 1.1
- *         }
+ *         llmParams: {}
  *     }
  */
 export interface AppModelsRequestAgentInvoke {
