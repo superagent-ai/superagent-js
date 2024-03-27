@@ -17,6 +17,9 @@ export const AppModelsRequestDatasource: core.serialization.ObjectSchema<
     url: core.serialization.string().optional(),
     metadata: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     vectorDbId: core.serialization.string().optional(),
+    embeddingsModelProvider: core.serialization
+        .lazy(async () => (await import("..")).EmbeddingsModelProvider)
+        .optional(),
 });
 
 export declare namespace AppModelsRequestDatasource {
@@ -28,5 +31,6 @@ export declare namespace AppModelsRequestDatasource {
         url?: string | null;
         metadata?: Record<string, unknown> | null;
         vectorDbId?: string | null;
+        embeddingsModelProvider?: serializers.EmbeddingsModelProvider.Raw | null;
     }
 }

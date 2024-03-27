@@ -7,6 +7,7 @@ export * from "./ApiKeyList";
 export * from "./DatasourceList";
 export * from "./DatasourceStatus";
 export * from "./DatasourceType";
+export * from "./EmbeddingsModelProvider";
 export * from "./FunctionDefinition";
 export * from "./HttpValidationError";
 export * from "./LlmList";

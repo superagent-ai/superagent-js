@@ -55,7 +55,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.22",
+                "X-Fern-SDK-Version": "v0.2.23",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -114,7 +114,8 @@ export class Datasource {
      * @example
      *     await superAgent.datasource.create({
      *         name: "string",
-     *         type: "string"
+     *         type: "string",
+     *         embeddingsModelProvider: SuperAgent.EmbeddingsModelProvider.Openai
      *     })
      */
     public async create(
@@ -131,7 +132,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.22",
+                "X-Fern-SDK-Version": "v0.2.23",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -206,7 +207,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.22",
+                "X-Fern-SDK-Version": "v0.2.23",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -275,7 +276,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.22",
+                "X-Fern-SDK-Version": "v0.2.23",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -328,7 +329,8 @@ export class Datasource {
      * @example
      *     await superAgent.datasource.update("string", {
      *         name: "string",
-     *         type: "string"
+     *         type: "string",
+     *         embeddingsModelProvider: SuperAgent.EmbeddingsModelProvider.Openai
      *     })
      */
     public async update(
@@ -346,7 +348,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.22",
+                "X-Fern-SDK-Version": "v0.2.23",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

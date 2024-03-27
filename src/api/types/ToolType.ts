@@ -25,7 +25,9 @@ export type ToolType =
     | "FUNCTION"
     | "HTTP"
     | "SUPERRAG"
-    | "RESEARCH";
+    | "RESEARCH"
+    | "GITHUB"
+    | "SCRAPER";
 
 export const ToolType = {
     Algolia: "ALGOLIA",
@@ -48,4 +50,6 @@ export const ToolType = {
     Http: "HTTP",
     Superrag: "SUPERRAG",
     Research: "RESEARCH",
+    Github: "GITHUB",
+    Scraper: "SCRAPER",
 } as const;

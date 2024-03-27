@@ -28,6 +28,8 @@ export const ToolType: core.serialization.Schema<serializers.ToolType.Raw, Super
         "HTTP",
         "SUPERRAG",
         "RESEARCH",
+        "GITHUB",
+        "SCRAPER",
     ]);
 
 export declare namespace ToolType {
@@ -51,5 +53,7 @@ export declare namespace ToolType {
         | "FUNCTION"
         | "HTTP"
         | "SUPERRAG"
-        | "RESEARCH";
+        | "RESEARCH"
+        | "GITHUB"
+        | "SCRAPER";
 }
