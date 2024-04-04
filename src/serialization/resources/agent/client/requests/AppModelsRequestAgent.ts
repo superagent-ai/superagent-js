@@ -23,6 +23,7 @@ export const AppModelsRequestAgent: core.serialization.Schema<
         .lazyObject(async () => (await import("../../../..")).OpenAiAssistantParameters)
         .optional(),
     metadata: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+    outputSchema: core.serialization.string().optional(),
 });
 
 export declare namespace AppModelsRequestAgent {
@@ -38,5 +39,6 @@ export declare namespace AppModelsRequestAgent {
         type?: serializers.AgentType.Raw | null;
         parameters?: serializers.OpenAiAssistantParameters.Raw | null;
         metadata?: Record<string, unknown> | null;
+        outputSchema?: string | null;
     }
 }

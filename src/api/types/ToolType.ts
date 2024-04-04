@@ -27,7 +27,8 @@ export type ToolType =
     | "SUPERRAG"
     | "RESEARCH"
     | "GITHUB"
-    | "SCRAPER";
+    | "SCRAPER"
+    | "GOOGLE_SEARCH";
 
 export const ToolType = {
     Algolia: "ALGOLIA",
@@ -52,4 +53,5 @@ export const ToolType = {
     Research: "RESEARCH",
     Github: "GITHUB",
     Scraper: "SCRAPER",
+    GoogleSearch: "GOOGLE_SEARCH",
 } as const;

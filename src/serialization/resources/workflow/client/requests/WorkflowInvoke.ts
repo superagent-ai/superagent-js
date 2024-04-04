@@ -11,6 +11,7 @@ export const WorkflowInvoke: core.serialization.Schema<serializers.WorkflowInvok
         input: core.serialization.string(),
         enableStreaming: core.serialization.boolean(),
         sessionId: core.serialization.string().optional(),
+        outputSchemas: core.serialization.record(core.serialization.string(), core.serialization.string()).optional(),
     });
 
 export declare namespace WorkflowInvoke {
@@ -18,5 +19,6 @@ export declare namespace WorkflowInvoke {
         input: string;
         enableStreaming: boolean;
         sessionId?: string | null;
+        outputSchemas?: Record<string, string> | null;
     }
 }

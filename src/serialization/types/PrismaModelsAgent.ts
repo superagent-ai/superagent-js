@@ -36,6 +36,7 @@ export const PrismaModelsAgent: core.serialization.ObjectSchema<
         .list(core.serialization.lazyObject(async () => (await import("..")).PrismaModelsWorkflowStep))
         .optional(),
     metadata: core.serialization.unknown().optional(),
+    outputSchema: core.serialization.string().optional(),
 });
 
 export declare namespace PrismaModelsAgent {
@@ -58,5 +59,6 @@ export declare namespace PrismaModelsAgent {
         tools?: serializers.PrismaModelsAgentTool.Raw[] | null;
         workflowSteps?: serializers.PrismaModelsWorkflowStep.Raw[] | null;
         metadata?: unknown | null;
+        outputSchema?: string | null;
     }
 }

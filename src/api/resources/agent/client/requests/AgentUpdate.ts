@@ -16,4 +16,5 @@ export interface AgentUpdate {
     avatar?: string;
     type?: string;
     metadata?: Record<string, unknown>;
+    outputSchema?: string;
 }

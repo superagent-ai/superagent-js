@@ -25,4 +25,5 @@ export interface AppModelsRequestAgent {
     type?: SuperAgent.AgentType;
     parameters?: SuperAgent.OpenAiAssistantParameters;
     metadata?: Record<string, unknown>;
+    outputSchema?: string;
 }

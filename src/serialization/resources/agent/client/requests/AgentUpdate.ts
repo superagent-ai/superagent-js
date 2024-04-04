@@ -17,6 +17,7 @@ export const AgentUpdate: core.serialization.Schema<serializers.AgentUpdate.Raw,
         avatar: core.serialization.string().optional(),
         type: core.serialization.string().optional(),
         metadata: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+        outputSchema: core.serialization.string().optional(),
     });
 
 export declare namespace AgentUpdate {
@@ -30,5 +31,6 @@ export declare namespace AgentUpdate {
         avatar?: string | null;
         type?: string | null;
         metadata?: Record<string, unknown> | null;
+        outputSchema?: string | null;
     }
 }

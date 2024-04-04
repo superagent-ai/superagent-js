@@ -13,4 +13,5 @@ export interface WorkflowInvoke {
     input: string;
     enableStreaming: boolean;
     sessionId?: string;
+    outputSchemas?: Record<string, string>;
 }

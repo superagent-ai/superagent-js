@@ -26,4 +26,5 @@ export interface PrismaModelsAgent {
     tools?: SuperAgent.PrismaModelsAgentTool[];
     workflowSteps?: SuperAgent.PrismaModelsWorkflowStep[];
     metadata?: unknown;
+    outputSchema?: string;
 }
