@@ -28,6 +28,7 @@ export type ToolType =
     | "RESEARCH"
     | "GITHUB"
     | "SCRAPER"
+    | "ADVANCED_SCRAPER"
     | "GOOGLE_SEARCH";
 
 export const ToolType = {
@@ -53,5 +54,6 @@ export const ToolType = {
     Research: "RESEARCH",
     Github: "GITHUB",
     Scraper: "SCRAPER",
+    AdvancedScraper: "ADVANCED_SCRAPER",
     GoogleSearch: "GOOGLE_SEARCH",
 } as const;
