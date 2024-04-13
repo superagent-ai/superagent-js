@@ -5,7 +5,14 @@
 /**
  * An enumeration.
  */
-export type LlmProvider = "OPENAI" | "AZURE_OPENAI" | "HUGGINGFACE" | "PERPLEXITY" | "TOGETHER_AI" | "ANTHROPIC";
+export type LlmProvider =
+    | "OPENAI"
+    | "AZURE_OPENAI"
+    | "HUGGINGFACE"
+    | "PERPLEXITY"
+    | "TOGETHER_AI"
+    | "ANTHROPIC"
+    | "BEDROCK";
 
 export const LlmProvider = {
     Openai: "OPENAI",
@@ -14,4 +21,5 @@ export const LlmProvider = {
     Perplexity: "PERPLEXITY",
     TogetherAi: "TOGETHER_AI",
     Anthropic: "ANTHROPIC",
+    Bedrock: "BEDROCK",
 } as const;

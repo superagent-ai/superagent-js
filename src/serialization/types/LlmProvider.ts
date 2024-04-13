@@ -7,8 +7,16 @@ import * as SuperAgent from "../../api";
 import * as core from "../../core";
 
 export const LlmProvider: core.serialization.Schema<serializers.LlmProvider.Raw, SuperAgent.LlmProvider> =
-    core.serialization.enum_(["OPENAI", "AZURE_OPENAI", "HUGGINGFACE", "PERPLEXITY", "TOGETHER_AI", "ANTHROPIC"]);
+    core.serialization.enum_([
+        "OPENAI",
+        "AZURE_OPENAI",
+        "HUGGINGFACE",
+        "PERPLEXITY",
+        "TOGETHER_AI",
+        "ANTHROPIC",
+        "BEDROCK",
+    ]);
 
 export declare namespace LlmProvider {
-    type Raw = "OPENAI" | "AZURE_OPENAI" | "HUGGINGFACE" | "PERPLEXITY" | "TOGETHER_AI" | "ANTHROPIC";
+    type Raw = "OPENAI" | "AZURE_OPENAI" | "HUGGINGFACE" | "PERPLEXITY" | "TOGETHER_AI" | "ANTHROPIC" | "BEDROCK";
 }
