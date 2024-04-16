@@ -858,9 +858,9 @@ camelcase@^6.2.0:
   integrity sha512-Gmy6FhYlCY7uOElZUSbxo2UCDH8owEk996gkbrpsgGtrJLM3J7jGxl9Ic7Qwwj4ivOE5AWZWRMecDdF7hqGjFA==
 
 caniuse-lite@^1.0.30001587:
-  version "1.0.30001609"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001609.tgz#fc34fad75c0c6d6d6303bdbceec2da8f203dabd6"
-  integrity sha512-JFPQs34lHKx1B5t1EpQpWH4c+29zIyn/haGsbpfq3suuV9v56enjFt23zqijxGTMwy1p/4H2tjnQMY+p1WoAyA==
+  version "1.0.30001610"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001610.tgz#2f44ed6e21d359e914271ae35b68903632628ccf"
+  integrity sha512-QFutAY4NgaelojVMjY63o6XlZyORPaLfyMnsl3HgnWdJUcX6K0oaJymHjH8PT5Gk7sTm8rvC/c5COUQKXqmOMA==
 
 chalk@^2.4.2:
   version "2.4.2"
@@ -1018,9 +1018,9 @@ diff-sequences@^29.6.3:
   integrity sha512-EjePK1srD3P08o2j4f0ExnylqRs5B9tJjcp9t1krH2qRi8CCdsYfwe9JgSLurFBWwq4uOlipzfk5fHNvwFKr8Q==
 
 electron-to-chromium@^1.4.668:
-  version "1.4.736"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.736.tgz#ecb4348f4d5c70fb1e31c347e5bad6b751066416"
-  integrity sha512-Rer6wc3ynLelKNM4lOCg7/zPQj8tPOCB2hzD32PX9wd3hgRRi9MxEbmkFCokzcEhRVMiOVLjnL9ig9cefJ+6+Q==
+  version "1.4.737"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.737.tgz#3a774a58e04980741f65d440f5fdf57af18b6dde"
+  integrity sha512-QvLTxaLHKdy5YxvixAw/FfHq2eWLUL9KvsPjp0aHK1gI5d3EDuDgITkvj0nFO2c6zUY3ZqVAJQiBYyQP9tQpfw==
 
 emittery@^0.13.1:
   version "0.13.1"
