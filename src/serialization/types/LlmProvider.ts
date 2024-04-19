@@ -15,8 +15,19 @@ export const LlmProvider: core.serialization.Schema<serializers.LlmProvider.Raw,
         "TOGETHER_AI",
         "ANTHROPIC",
         "BEDROCK",
+        "GROQ",
+        "MISTRAL",
     ]);
 
 export declare namespace LlmProvider {
-    type Raw = "OPENAI" | "AZURE_OPENAI" | "HUGGINGFACE" | "PERPLEXITY" | "TOGETHER_AI" | "ANTHROPIC" | "BEDROCK";
+    type Raw =
+        | "OPENAI"
+        | "AZURE_OPENAI"
+        | "HUGGINGFACE"
+        | "PERPLEXITY"
+        | "TOGETHER_AI"
+        | "ANTHROPIC"
+        | "BEDROCK"
+        | "GROQ"
+        | "MISTRAL";
 }

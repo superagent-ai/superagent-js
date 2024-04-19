@@ -12,7 +12,9 @@ export type LlmProvider =
     | "PERPLEXITY"
     | "TOGETHER_AI"
     | "ANTHROPIC"
-    | "BEDROCK";
+    | "BEDROCK"
+    | "GROQ"
+    | "MISTRAL";
 
 export const LlmProvider = {
     Openai: "OPENAI",
@@ -22,4 +24,6 @@ export const LlmProvider = {
     TogetherAi: "TOGETHER_AI",
     Anthropic: "ANTHROPIC",
     Bedrock: "BEDROCK",
+    Groq: "GROQ",
+    Mistral: "MISTRAL",
 } as const;
