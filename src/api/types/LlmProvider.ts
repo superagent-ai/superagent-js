@@ -14,7 +14,8 @@ export type LlmProvider =
     | "ANTHROPIC"
     | "BEDROCK"
     | "GROQ"
-    | "MISTRAL";
+    | "MISTRAL"
+    | "COHERE_CHAT";
 
 export const LlmProvider = {
     Openai: "OPENAI",
@@ -26,4 +27,5 @@ export const LlmProvider = {
     Bedrock: "BEDROCK",
     Groq: "GROQ",
     Mistral: "MISTRAL",
+    CohereChat: "COHERE_CHAT",
 } as const;

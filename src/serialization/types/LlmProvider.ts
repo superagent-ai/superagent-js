@@ -17,6 +17,7 @@ export const LlmProvider: core.serialization.Schema<serializers.LlmProvider.Raw,
         "BEDROCK",
         "GROQ",
         "MISTRAL",
+        "COHERE_CHAT",
     ]);
 
 export declare namespace LlmProvider {
@@ -29,5 +30,6 @@ export declare namespace LlmProvider {
         | "ANTHROPIC"
         | "BEDROCK"
         | "GROQ"
-        | "MISTRAL";
+        | "MISTRAL"
+        | "COHERE_CHAT";
 }
