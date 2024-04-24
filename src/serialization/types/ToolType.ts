@@ -32,6 +32,7 @@ export const ToolType: core.serialization.Schema<serializers.ToolType.Raw, Super
         "SCRAPER",
         "ADVANCED_SCRAPER",
         "GOOGLE_SEARCH",
+        "SEC",
     ]);
 
 export declare namespace ToolType {
@@ -59,5 +60,6 @@ export declare namespace ToolType {
         | "GITHUB"
         | "SCRAPER"
         | "ADVANCED_SCRAPER"
-        | "GOOGLE_SEARCH";
+        | "GOOGLE_SEARCH"
+        | "SEC";
 }

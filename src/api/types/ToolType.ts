@@ -29,7 +29,8 @@ export type ToolType =
     | "GITHUB"
     | "SCRAPER"
     | "ADVANCED_SCRAPER"
-    | "GOOGLE_SEARCH";
+    | "GOOGLE_SEARCH"
+    | "SEC";
 
 export const ToolType = {
     Algolia: "ALGOLIA",
@@ -56,4 +57,5 @@ export const ToolType = {
     Scraper: "SCRAPER",
     AdvancedScraper: "ADVANCED_SCRAPER",
     GoogleSearch: "GOOGLE_SEARCH",
+    Sec: "SEC",
 } as const;
