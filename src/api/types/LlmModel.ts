@@ -6,26 +6,38 @@
  * An enumeration.
  */
 export type LlmModel =
+    | "GPT_3_5_TURBO"
     | "GPT_3_5_TURBO_16K_0613"
     | "GPT_3_5_TURBO_0613"
     | "GPT_3_5_TURBO_1106"
     | "GPT_3_5_TURBO_0125"
+    | "GPT_4"
     | "GPT_4_0613"
+    | "GPT_4_32K"
     | "GPT_4_32K_0613"
     | "GPT_4_1106_PREVIEW"
+    | "GPT_4_0125_PREVIEW"
+    | "GPT_4_TURBO"
     | "GPT_4_TURBO_PREVIEW"
+    | "GPT_4_TURBO_2024_04_09"
     | "MISTRAL_7B_INSTRUCT_V01"
     | "MIXTRAL_8X7B_INSTRUCT_V01";
 
 export const LlmModel = {
+    Gpt35Turbo: "GPT_3_5_TURBO",
     Gpt35Turbo16K0613: "GPT_3_5_TURBO_16K_0613",
     Gpt35Turbo0613: "GPT_3_5_TURBO_0613",
     Gpt35Turbo1106: "GPT_3_5_TURBO_1106",
     Gpt35Turbo0125: "GPT_3_5_TURBO_0125",
+    Gpt4: "GPT_4",
     Gpt40613: "GPT_4_0613",
+    Gpt432K: "GPT_4_32K",
     Gpt432K0613: "GPT_4_32K_0613",
     Gpt41106Preview: "GPT_4_1106_PREVIEW",
+    Gpt40125Preview: "GPT_4_0125_PREVIEW",
+    Gpt4Turbo: "GPT_4_TURBO",
     Gpt4TurboPreview: "GPT_4_TURBO_PREVIEW",
+    Gpt4Turbo20240409: "GPT_4_TURBO_2024_04_09",
     Mistral7BInstructV01: "MISTRAL_7B_INSTRUCT_V01",
     Mixtral8X7BInstructV01: "MIXTRAL_8X7B_INSTRUCT_V01",
 } as const;
