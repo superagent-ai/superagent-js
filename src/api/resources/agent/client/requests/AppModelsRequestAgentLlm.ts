@@ -5,7 +5,7 @@
 /**
  * @example
  *     {
- *         llmId: "string"
+ *         llmId: "llmId"
  *     }
  */
 export interface AppModelsRequestAgentLlm {

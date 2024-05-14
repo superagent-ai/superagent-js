@@ -5,8 +5,8 @@
 /**
  * @example
  *     {
- *         name: "string",
- *         type: "string"
+ *         name: "name",
+ *         type: "type"
  *     }
  */
 export interface AppModelsRequestTool {

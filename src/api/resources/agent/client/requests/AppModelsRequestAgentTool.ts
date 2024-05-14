@@ -5,7 +5,7 @@
 /**
  * @example
  *     {
- *         toolId: "string"
+ *         toolId: "toolId"
  *     }
  */
 export interface AppModelsRequestAgentTool {

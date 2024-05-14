@@ -7,10 +7,7 @@ import * as SuperAgent from "../../../..";
 /**
  * @example
  *     {
- *         name: "string",
- *         llmProvider: SuperAgent.LlmProvider.Openai,
- *         type: SuperAgent.AgentType.Superagent,
- *         parameters: {}
+ *         name: "name"
  *     }
  */
 export interface AppModelsRequestAgent {

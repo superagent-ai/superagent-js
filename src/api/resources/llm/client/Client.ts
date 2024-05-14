@@ -41,7 +41,7 @@ export class Llm {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -86,8 +86,8 @@ export class Llm {
      *
      * @example
      *     await superAgent.llm.create({
-     *         provider: "string",
-     *         apiKey: "string"
+     *         provider: "provider",
+     *         apiKey: "apiKey"
      *     })
      */
     public async create(
@@ -104,7 +104,7 @@ export class Llm {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -161,7 +161,7 @@ export class Llm {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.llm.get("string")
+     *     await superAgent.llm.get("llm_id")
      */
     public async get(llmId: string, requestOptions?: Llm.RequestOptions): Promise<SuperAgent.AppModelsResponseLlm> {
         const _response = await core.fetcher({
@@ -174,7 +174,7 @@ export class Llm {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -230,9 +230,9 @@ export class Llm {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.llm.update("string", {
-     *         provider: "string",
-     *         apiKey: "string"
+     *     await superAgent.llm.update("llm_id", {
+     *         provider: "provider",
+     *         apiKey: "apiKey"
      *     })
      */
     public async update(
@@ -250,7 +250,7 @@ export class Llm {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

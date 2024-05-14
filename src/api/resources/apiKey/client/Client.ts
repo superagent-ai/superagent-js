@@ -41,7 +41,7 @@ export class ApiKey {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -86,7 +86,7 @@ export class ApiKey {
      *
      * @example
      *     await superAgent.apiKey.create({
-     *         name: "string"
+     *         name: "name"
      *     })
      */
     public async create(
@@ -103,7 +103,7 @@ export class ApiKey {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -160,7 +160,7 @@ export class ApiKey {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.apiKey.delete("string")
+     *     await superAgent.apiKey.delete("id")
      */
     public async delete(
         id: string,
@@ -176,7 +176,7 @@ export class ApiKey {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -232,8 +232,8 @@ export class ApiKey {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.apiKey.update("string", {
-     *         name: "string"
+     *     await superAgent.apiKey.update("id", {
+     *         name: "name"
      *     })
      */
     public async update(
@@ -251,7 +251,7 @@ export class ApiKey {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

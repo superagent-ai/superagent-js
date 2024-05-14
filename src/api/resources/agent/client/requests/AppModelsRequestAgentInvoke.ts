@@ -7,9 +7,8 @@ import * as SuperAgent from "../../../..";
 /**
  * @example
  *     {
- *         input: "string",
- *         enableStreaming: true,
- *         llmParams: {}
+ *         input: "input",
+ *         enableStreaming: true
  *     }
  */
 export interface AppModelsRequestAgentInvoke {

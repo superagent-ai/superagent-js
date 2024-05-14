@@ -20,6 +20,7 @@ export type LlmModel =
     | "GPT_4_TURBO"
     | "GPT_4_TURBO_PREVIEW"
     | "GPT_4_TURBO_2024_04_09"
+    | "GPT_4_0"
     | "MISTRAL_7B_INSTRUCT_V01"
     | "MIXTRAL_8X7B_INSTRUCT_V01";
 
@@ -38,6 +39,7 @@ export const LlmModel = {
     Gpt4Turbo: "GPT_4_TURBO",
     Gpt4TurboPreview: "GPT_4_TURBO_PREVIEW",
     Gpt4Turbo20240409: "GPT_4_TURBO_2024_04_09",
+    Gpt40: "GPT_4_0",
     Mistral7BInstructV01: "MISTRAL_7B_INSTRUCT_V01",
     Mixtral8X7BInstructV01: "MIXTRAL_8X7B_INSTRUCT_V01",
 } as const;

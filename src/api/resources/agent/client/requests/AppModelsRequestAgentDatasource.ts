@@ -5,7 +5,7 @@
 /**
  * @example
  *     {
- *         datasourceId: "string"
+ *         datasourceId: "datasourceId"
  *     }
  */
 export interface AppModelsRequestAgentDatasource {

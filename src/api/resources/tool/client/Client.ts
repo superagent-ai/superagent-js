@@ -55,7 +55,7 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -113,8 +113,8 @@ export class Tool {
      *
      * @example
      *     await superAgent.tool.create({
-     *         name: "string",
-     *         type: "string"
+     *         name: "name",
+     *         type: "type"
      *     })
      */
     public async create(
@@ -131,7 +131,7 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -188,7 +188,7 @@ export class Tool {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.tool.get("string")
+     *     await superAgent.tool.get("tool_id")
      */
     public async get(toolId: string, requestOptions?: Tool.RequestOptions): Promise<SuperAgent.AppModelsResponseTool> {
         const _response = await core.fetcher({
@@ -201,7 +201,7 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -257,7 +257,7 @@ export class Tool {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.tool.delete("string")
+     *     await superAgent.tool.delete("tool_id")
      */
     public async delete(toolId: string, requestOptions?: Tool.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -270,7 +270,7 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -321,7 +321,7 @@ export class Tool {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.tool.update("string")
+     *     await superAgent.tool.update("tool_id")
      */
     public async update(
         toolId: string,
@@ -338,7 +338,7 @@ export class Tool {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

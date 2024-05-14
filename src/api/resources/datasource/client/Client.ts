@@ -55,7 +55,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -113,9 +113,8 @@ export class Datasource {
      *
      * @example
      *     await superAgent.datasource.create({
-     *         name: "string",
-     *         type: "string",
-     *         embeddingsModelProvider: SuperAgent.EmbeddingsModelProvider.Openai
+     *         name: "name",
+     *         type: "type"
      *     })
      */
     public async create(
@@ -132,7 +131,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -191,7 +190,7 @@ export class Datasource {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.datasource.get("string")
+     *     await superAgent.datasource.get("datasource_id")
      */
     public async get(
         datasourceId: string,
@@ -207,7 +206,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -263,7 +262,7 @@ export class Datasource {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.datasource.delete("string")
+     *     await superAgent.datasource.delete("datasource_id")
      */
     public async delete(datasourceId: string, requestOptions?: Datasource.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -276,7 +275,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -327,10 +326,9 @@ export class Datasource {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.datasource.update("string", {
-     *         name: "string",
-     *         type: "string",
-     *         embeddingsModelProvider: SuperAgent.EmbeddingsModelProvider.Openai
+     *     await superAgent.datasource.update("datasource_id", {
+     *         name: "name",
+     *         type: "type"
      *     })
      */
     public async update(
@@ -348,7 +346,7 @@ export class Datasource {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

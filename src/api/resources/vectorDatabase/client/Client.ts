@@ -31,9 +31,7 @@ export class VectorDatabase {
      * @example
      *     await superAgent.vectorDatabase.create({
      *         provider: SuperAgent.VectorDbProvider.Pinecone,
-     *         options: {
-     *             "string": {}
-     *         }
+     *         options: {}
      *     })
      */
     public async create(
@@ -50,7 +48,7 @@ export class VectorDatabase {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -119,7 +117,7 @@ export class VectorDatabase {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -163,7 +161,7 @@ export class VectorDatabase {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.vectorDatabase.get("string")
+     *     await superAgent.vectorDatabase.get("vector_db_id")
      */
     public async get(
         vectorDbId: string,
@@ -179,7 +177,7 @@ export class VectorDatabase {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -235,7 +233,7 @@ export class VectorDatabase {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.vectorDatabase.delete("string")
+     *     await superAgent.vectorDatabase.delete("vector_db_id")
      */
     public async delete(vectorDbId: string, requestOptions?: VectorDatabase.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -248,7 +246,7 @@ export class VectorDatabase {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -299,11 +297,9 @@ export class VectorDatabase {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.vectorDatabase.update("string", {
+     *     await superAgent.vectorDatabase.update("vector_db_id", {
      *         provider: SuperAgent.VectorDbProvider.Pinecone,
-     *         options: {
-     *             "string": {}
-     *         }
+     *         options: {}
      *     })
      */
     public async update(
@@ -321,7 +317,7 @@ export class VectorDatabase {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

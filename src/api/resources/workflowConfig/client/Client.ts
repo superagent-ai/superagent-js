@@ -35,7 +35,7 @@ export class WorkflowConfig {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -73,7 +73,7 @@ export class WorkflowConfig {
      * @throws {@link SuperAgent.UnprocessableEntityError}
      *
      * @example
-     *     await superAgent.workflowConfig.addConfig("string")
+     *     await superAgent.workflowConfig.addConfig("workflow_id")
      */
     public async addConfig(workflowId: string, requestOptions?: WorkflowConfig.RequestOptions): Promise<unknown> {
         const _response = await core.fetcher({
@@ -86,7 +86,7 @@ export class WorkflowConfig {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "superagentai-js",
-                "X-Fern-SDK-Version": "v0.2.36",
+                "X-Fern-SDK-Version": "v0.2.39",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

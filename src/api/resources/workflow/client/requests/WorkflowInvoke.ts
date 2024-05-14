@@ -5,7 +5,7 @@
 /**
  * @example
  *     {
- *         input: "string",
+ *         input: "input",
  *         enableStreaming: true
  *     }
  */
